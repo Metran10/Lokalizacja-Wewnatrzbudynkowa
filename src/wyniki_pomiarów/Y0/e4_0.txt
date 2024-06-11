@@ -1,0 +1,1664 @@
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.41 phase_slope=13.34 rssi_openspace=11.22 best=3.41
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=10.47 phase_slope=22.62 rssi_openspace=14.13 best=10.47
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.62 phase_slope=10.79 rssi_openspace=11.22 best=7.62
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.23 phase_slope=25.28 rssi_openspace=25.12 best=15.23
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.96 phase_slope=24.87 rssi_openspace=22.39 best=9.96
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=12.32 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=12.41 rssi_openspace=11.22 best=7.03
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.53 phase_slope=23.82 rssi_openspace=17.78 best=15.53
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.68 rssi_openspace=28.18 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.75 rssi_openspace=25.12 best=13.18
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.62 phase_slope=12.69 rssi_openspace=11.22 best=7.62
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.55 phase_slope=12.32 rssi_openspace=12.59 best=3.55
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.53 phase_slope=22.97 rssi_openspace=22.39 best=15.53
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.63 phase_slope=12.73 rssi_openspace=11.22 best=3.63
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.68 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=12.51 rssi_openspace=8.91 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.58 phase_slope=13.21 rssi_openspace=14.13 best=3.58
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.29 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.74 phase_slope=12.55 rssi_openspace=8.91 best=3.74
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.39 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.47 rssi_openspace=28.18 best=13.18
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=6.74 phase_slope=12.81 rssi_openspace=11.22 best=6.74
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.83 phase_slope=24.24 rssi_openspace=17.78 best=15.83
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.62 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.57 rssi_openspace=28.18 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.81 phase_slope=24.10 rssi_openspace=22.39 best=15.81
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=13.04 rssi_openspace=14.13 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.57 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=0.95 phase_slope=22.22 rssi_openspace=22.39 best=0.95
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.83 phase_slope=13.08 rssi_openspace=10.00 best=3.83
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.53 phase_slope=24.25 rssi_openspace=14.13 best=15.53
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=12.66 rssi_openspace=10.00 best=7.03
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.71 phase_slope=13.27 rssi_openspace=12.59 best=3.71
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.33 rssi_openspace=28.18 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.70 phase_slope=13.29 rssi_openspace=28.18 best=3.70
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.91 phase_slope=12.96 rssi_openspace=12.59 best=3.91
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=12.44 rssi_openspace=12.59 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.93 phase_slope=12.75 rssi_openspace=22.39 best=3.93
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.38 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.89 phase_slope=12.75 rssi_openspace=19.95 best=3.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=12.17 rssi_openspace=8.91 best=7.03
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.53 phase_slope=24.40 rssi_openspace=17.78 best=15.53
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.53 phase_slope=24.99 rssi_openspace=22.39 best=15.53
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.76 phase_slope=12.79 rssi_openspace=11.22 best=3.76
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=12.18 rssi_openspace=15.85 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.32 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.44 rssi_openspace=17.78 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.41 rssi_openspace=17.78 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.96 phase_slope=24.49 rssi_openspace=17.78 best=9.96
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.20 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.67 phase_slope=25.46 rssi_openspace=22.39 best=9.67
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=6.45 phase_slope=11.83 rssi_openspace=11.22 best=6.45
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.96 phase_slope=24.64 rssi_openspace=19.95 best=9.96
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.84 rssi_openspace=12.59 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.36 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.96 phase_slope=12.25 rssi_openspace=10.00 best=3.96
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.62 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: do not use
+Distance estimates: mcpd: ifft=14.10 phase_slope=10.80 rssi_openspace=17.78 best=14.10
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.67 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.96 phase_slope=23.97 rssi_openspace=19.95 best=9.96
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.54 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.66 rssi_openspace=15.85 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=0.00 phase_slope=33.59 rssi_openspace=19.95 best=0.00
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.59 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.50 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.96 phase_slope=23.79 rssi_openspace=28.18 best=9.96
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.47 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.96 phase_slope=23.91 rssi_openspace=19.95 best=9.96
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.46 rssi_openspace=31.62 best=12.89
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.99 phase_slope=11.45 rssi_openspace=11.22 best=3.99
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=10.25 phase_slope=23.67 rssi_openspace=15.85 best=10.25
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.41 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.54 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.86 phase_slope=12.48 rssi_openspace=10.00 best=3.86
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.91 phase_slope=12.46 rssi_openspace=8.91 best=3.91
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.87 phase_slope=12.40 rssi_openspace=12.59 best=3.87
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.44 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.47 rssi_openspace=28.18 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.62 phase_slope=11.92 rssi_openspace=10.00 best=7.62
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.44 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.66 rssi_openspace=17.78 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.41 rssi_openspace=17.78 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.96 phase_slope=24.05 rssi_openspace=19.95 best=9.96
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.59 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.96 phase_slope=23.99 rssi_openspace=19.95 best=9.96
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.62 phase_slope=11.78 rssi_openspace=10.00 best=7.62
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.66 rssi_openspace=17.78 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.96 phase_slope=24.20 rssi_openspace=22.39 best=9.96
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.37 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.39 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.96 phase_slope=24.31 rssi_openspace=28.18 best=9.96
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.62 phase_slope=11.82 rssi_openspace=11.22 best=7.62
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.61 phase_slope=24.93 rssi_openspace=22.39 best=15.61
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.99 rssi_openspace=14.13 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.46 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.58 phase_slope=13.74 rssi_openspace=11.22 best=3.58
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.69 phase_slope=13.50 rssi_openspace=11.22 best=3.69
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.95 rssi_openspace=7.94 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.86 rssi_openspace=15.85 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.53 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.83 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.44 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=1.59 phase_slope=14.57 rssi_openspace=31.62 best=1.59
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=2.93 phase_slope=12.77 rssi_openspace=11.22 best=2.93
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.58 phase_slope=13.86 rssi_openspace=7.94 best=3.58
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.52 phase_slope=13.28 rssi_openspace=25.12 best=3.52
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.56 phase_slope=24.07 rssi_openspace=15.85 best=15.56
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: do not use
+Distance estimates: mcpd: ifft=3.53 phase_slope=12.29 rssi_openspace=31.62 best=3.53
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.57 phase_slope=13.74 rssi_openspace=12.59 best=3.57
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.47 phase_slope=12.68 rssi_openspace=35.48 best=3.47
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=0.11 phase_slope=14.66 rssi_openspace=11.22 best=0.11
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=12.60 phase_slope=16.21 rssi_openspace=19.95 best=12.60
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.45 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.88 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.37 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.53 phase_slope=24.79 rssi_openspace=22.39 best=15.53
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.44 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=12.00 rssi_openspace=12.59 best=7.03
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.81 phase_slope=24.53 rssi_openspace=15.85 best=15.81
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.49 phase_slope=13.18 rssi_openspace=28.18 best=3.49
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.58 phase_slope=13.39 rssi_openspace=12.59 best=3.58
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.96 phase_slope=24.89 rssi_openspace=22.39 best=9.96
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.58 phase_slope=24.76 rssi_openspace=28.18 best=15.58
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.63 phase_slope=13.19 rssi_openspace=12.59 best=3.63
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.61 phase_slope=13.10 rssi_openspace=25.12 best=3.61
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.41 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=12.11 rssi_openspace=11.22 best=7.03
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.47 phase_slope=12.75 rssi_openspace=31.62 best=3.47
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.42 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.56 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=0.85 phase_slope=11.01 rssi_openspace=19.95 best=0.85
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.63 phase_slope=25.45 rssi_openspace=17.78 best=15.63
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.51 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=12.01 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.77 phase_slope=12.87 rssi_openspace=7.94 best=3.77
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.62 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.85 phase_slope=12.05 rssi_openspace=11.22 best=3.85
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.79 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.93 phase_slope=12.00 rssi_openspace=12.59 best=3.93
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=4.01 phase_slope=11.80 rssi_openspace=10.00 best=4.01
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.53 phase_slope=23.75 rssi_openspace=15.85 best=15.53
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=4.06 phase_slope=12.05 rssi_openspace=17.78 best=4.06
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=11.97 rssi_openspace=11.22 best=7.03
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.94 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.83 phase_slope=13.27 rssi_openspace=15.85 best=3.83
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=12.22 rssi_openspace=12.59 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=12.34 rssi_openspace=14.13 best=7.03
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=3.68 phase_slope=13.74 rssi_openspace=11.22 best=3.68
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=12.09 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.28 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=7.32 phase_slope=14.08 rssi_openspace=22.39 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.38 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=12.06 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.72 phase_slope=12.22 rssi_openspace=31.62 best=3.72
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.70 phase_slope=13.26 rssi_openspace=14.13 best=3.70
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.96 phase_slope=13.08 rssi_openspace=14.13 best=3.96
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.89 phase_slope=23.07 rssi_openspace=19.95 best=15.89
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.88 phase_slope=12.73 rssi_openspace=12.59 best=3.88
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.53 phase_slope=22.93 rssi_openspace=22.39 best=15.53
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=13.12 rssi_openspace=14.13 best=7.03
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.79 rssi_openspace=31.62 best=13.18
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.27 rssi_openspace=25.12 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.98 phase_slope=13.27 rssi_openspace=11.22 best=3.98
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.99 phase_slope=12.89 rssi_openspace=12.59 best=3.99
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.62 phase_slope=11.26 rssi_openspace=12.59 best=7.62
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.55 rssi_openspace=17.78 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.51 phase_slope=13.07 rssi_openspace=28.18 best=3.51
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.81 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.67 phase_slope=12.99 rssi_openspace=17.78 best=3.67
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.74 phase_slope=23.66 rssi_openspace=25.12 best=15.74
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.73 rssi_openspace=10.00 best=7.03
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.76 phase_slope=13.73 rssi_openspace=12.59 best=3.76
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.78 phase_slope=13.56 rssi_openspace=17.78 best=3.78
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=5.86 phase_slope=10.84 rssi_openspace=10.00 best=5.86
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.75 phase_slope=23.17 rssi_openspace=22.39 best=15.75
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.71 rssi_openspace=7.94 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.08 rssi_openspace=17.78 best=13.18
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.78 rssi_openspace=8.91 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=6.74 phase_slope=10.75 rssi_openspace=10.00 best=6.74
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.66 phase_slope=22.91 rssi_openspace=19.95 best=15.66
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.80 phase_slope=13.45 rssi_openspace=10.00 best=3.80
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.97 rssi_openspace=8.91 best=7.32
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.62 phase_slope=22.70 rssi_openspace=17.78 best=15.62
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.65 phase_slope=22.94 rssi_openspace=19.95 best=15.65
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.85 rssi_openspace=7.94 best=7.03
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.62 phase_slope=23.06 rssi_openspace=19.95 best=15.62
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.92 rssi_openspace=7.08 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.85 rssi_openspace=8.91 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.65 phase_slope=13.47 rssi_openspace=31.62 best=3.65
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.68 rssi_openspace=10.00 best=7.03
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=2.34 phase_slope=13.66 rssi_openspace=14.13 best=2.34
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=11.09 rssi_openspace=10.00 best=7.03
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.72 phase_slope=13.65 rssi_openspace=12.59 best=3.72
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.19 rssi_openspace=19.95 best=13.18
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=1.46 phase_slope=11.97 rssi_openspace=10.00 best=1.46
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.09 rssi_openspace=25.12 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.70 phase_slope=13.97 rssi_openspace=22.39 best=3.70
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.07 rssi_openspace=19.95 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.69 phase_slope=13.80 rssi_openspace=12.59 best=3.69
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.54 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.03 rssi_openspace=17.78 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.71 phase_slope=13.61 rssi_openspace=28.18 best=3.71
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=14.87 rssi_openspace=22.39 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.65 phase_slope=12.89 rssi_openspace=31.62 best=3.65
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.71 phase_slope=24.14 rssi_openspace=25.12 best=15.71
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=14.91 rssi_openspace=19.95 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.53 phase_slope=13.77 rssi_openspace=17.78 best=3.53
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.03 rssi_openspace=22.39 best=13.18
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.52 rssi_openspace=10.00 best=7.03
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.63 phase_slope=13.29 rssi_openspace=14.13 best=3.63
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.58 phase_slope=13.76 rssi_openspace=12.59 best=3.58
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=10.71 phase_slope=22.84 rssi_openspace=17.78 best=10.71
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=13.77 phase_slope=13.79 rssi_openspace=19.95 best=13.77
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.55 phase_slope=13.26 rssi_openspace=11.22 best=3.55
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.51 phase_slope=14.33 rssi_openspace=15.85 best=3.51
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.03 rssi_openspace=22.39 best=13.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.67 phase_slope=24.13 rssi_openspace=14.13 best=15.67
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.27 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.65 phase_slope=13.56 rssi_openspace=11.22 best=3.65
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.69 phase_slope=13.62 rssi_openspace=12.59 best=3.69
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=14.65 phase_slope=24.01 rssi_openspace=14.13 best=14.65
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=14.94 phase_slope=23.56 rssi_openspace=19.95 best=14.94
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.57 phase_slope=13.94 rssi_openspace=12.59 best=3.57
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.56 phase_slope=13.77 rssi_openspace=15.85 best=3.56
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.44 rssi_openspace=15.85 best=13.18
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.62 phase_slope=12.02 rssi_openspace=11.22 best=7.62
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=10.25 phase_slope=23.06 rssi_openspace=22.39 best=10.25
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=6.74 phase_slope=11.92 rssi_openspace=10.00 best=6.74
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.46 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.62 phase_slope=11.40 rssi_openspace=12.59 best=7.62
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.88 rssi_openspace=11.22 best=7.03
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.50 phase_slope=23.65 rssi_openspace=19.95 best=9.50
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.67 rssi_openspace=7.94 best=7.03
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.34 phase_slope=14.83 rssi_openspace=12.59 best=3.34
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.78 rssi_openspace=10.00 best=7.03
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=14.65 phase_slope=24.87 rssi_openspace=15.85 best=14.65
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=5.86 phase_slope=11.61 rssi_openspace=12.59 best=5.86
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.62 phase_slope=11.97 rssi_openspace=11.22 best=7.62
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=11.55 rssi_openspace=8.91 best=7.03
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=8.20 phase_slope=24.41 rssi_openspace=19.95 best=8.20
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.85 rssi_openspace=7.08 best=7.03
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=15.81 rssi_openspace=19.95 best=13.18
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.87 rssi_openspace=12.59 best=7.03
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.97 phase_slope=13.16 rssi_openspace=12.59 best=3.97
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.59 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.50 phase_slope=24.37 rssi_openspace=17.78 best=15.50
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.69 phase_slope=13.92 rssi_openspace=19.95 best=3.69
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.67 phase_slope=12.63 rssi_openspace=7.08 best=3.67
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.47 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.34 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.53 phase_slope=24.05 rssi_openspace=17.78 best=15.53
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.53 phase_slope=24.15 rssi_openspace=15.85 best=15.53
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.10 rssi_openspace=35.48 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.22 rssi_openspace=19.95 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.60 phase_slope=13.03 rssi_openspace=6.31 best=3.60
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.14 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.68 rssi_openspace=8.91 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.28 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.42 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.73 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=3.81 phase_slope=17.04 rssi_openspace=19.95 best=3.81
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.61 phase_slope=13.18 rssi_openspace=11.22 best=3.61
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.86 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.79 rssi_openspace=8.91 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.06 rssi_openspace=31.62 best=12.89
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.93 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.20 rssi_openspace=22.39 best=13.18
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.96 rssi_openspace=12.59 best=7.03
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.89 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.65 phase_slope=24.08 rssi_openspace=17.78 best=15.65
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.87 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.66 phase_slope=12.99 rssi_openspace=11.22 best=3.66
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.93 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=3.48 phase_slope=12.96 rssi_openspace=11.22 best=3.48
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.56 phase_slope=24.07 rssi_openspace=14.13 best=15.56
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.92 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.62 phase_slope=10.79 rssi_openspace=10.00 best=7.62
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.69 phase_slope=23.93 rssi_openspace=17.78 best=15.69
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.67 phase_slope=24.26 rssi_openspace=17.78 best=15.67
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.95 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: do not use
+Distance estimates: mcpd: ifft=3.60 phase_slope=12.34 rssi_openspace=35.48 best=3.60
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.61 phase_slope=13.39 rssi_openspace=11.22 best=3.61
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: poor
+Distance estimates: mcpd: ifft=15.73 phase_slope=22.18 rssi_openspace=25.12 best=15.73
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.55 phase_slope=24.14 rssi_openspace=17.78 best=15.55
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.79 rssi_openspace=8.91 best=7.32
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.60 phase_slope=24.17 rssi_openspace=17.78 best=15.60
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.17 rssi_openspace=25.12 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.64 phase_slope=13.22 rssi_openspace=10.00 best=3.64
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.63 phase_slope=24.69 rssi_openspace=19.95 best=15.63
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.79 rssi_openspace=8.91 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.87 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.22 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.61 phase_slope=24.36 rssi_openspace=22.39 best=15.61
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.55 rssi_openspace=22.39 best=13.18
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.25 rssi_openspace=28.18 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.27 rssi_openspace=22.39 best=13.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.67 phase_slope=24.19 rssi_openspace=19.95 best=15.67
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.86 rssi_openspace=10.00 best=7.03
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.96 rssi_openspace=12.59 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.63 phase_slope=13.46 rssi_openspace=15.85 best=3.63
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.21 rssi_openspace=25.12 best=13.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.59 phase_slope=23.87 rssi_openspace=14.13 best=15.59
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.97 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.97 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=11.72 phase_slope=16.01 rssi_openspace=17.78 best=11.72
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.66 phase_slope=13.17 rssi_openspace=12.59 best=3.66
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=0.29 phase_slope=45.05 rssi_openspace=14.13 best=0.29
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.11 rssi_openspace=28.18 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=2.64 phase_slope=13.25 rssi_openspace=28.18 best=2.64
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.05 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.03 rssi_openspace=12.59 best=7.32
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.20 rssi_openspace=25.12 best=13.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.66 phase_slope=23.99 rssi_openspace=28.18 best=15.66
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.98 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.02 rssi_openspace=12.59 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.60 phase_slope=13.26 rssi_openspace=22.39 best=3.60
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.22 rssi_openspace=25.12 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.50 rssi_openspace=19.95 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.23 rssi_openspace=28.18 best=13.18
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.27 rssi_openspace=25.12 best=13.18
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.09 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.65 phase_slope=24.13 rssi_openspace=25.12 best=15.65
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.18 rssi_openspace=28.18 best=13.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=5.57 phase_slope=58.55 rssi_openspace=22.39 best=5.57
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.69 phase_slope=24.42 rssi_openspace=19.95 best=15.69
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.44 rssi_openspace=19.95 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.63 phase_slope=13.17 rssi_openspace=25.12 best=3.63
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.73 phase_slope=24.02 rssi_openspace=19.95 best=15.73
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.33 rssi_openspace=19.95 best=13.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.70 phase_slope=23.97 rssi_openspace=22.39 best=15.70
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.70 phase_slope=24.05 rssi_openspace=22.39 best=15.70
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.24 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=6.45 phase_slope=11.00 rssi_openspace=10.00 best=6.45
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=16.42 rssi_openspace=22.39 best=12.89
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.31 rssi_openspace=25.12 best=13.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.72 phase_slope=24.37 rssi_openspace=17.78 best=15.72
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.23 rssi_openspace=31.62 best=13.18
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.56 phase_slope=12.48 rssi_openspace=28.18 best=3.56
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.69 phase_slope=24.43 rssi_openspace=25.12 best=15.69
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=12.89 phase_slope=15.97 rssi_openspace=28.18 best=12.89
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.69 phase_slope=24.54 rssi_openspace=25.12 best=15.69
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.70 phase_slope=24.40 rssi_openspace=19.95 best=15.70
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=3.65 phase_slope=13.04 rssi_openspace=25.12 best=3.65
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.29 rssi_openspace=31.62 best=13.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.66 phase_slope=24.29 rssi_openspace=17.78 best=15.66
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.20 rssi_openspace=28.18 best=13.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.69 phase_slope=23.56 rssi_openspace=22.39 best=15.69
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.66 phase_slope=24.19 rssi_openspace=15.85 best=15.66
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.67 phase_slope=24.60 rssi_openspace=15.85 best=15.67
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.74 phase_slope=24.26 rssi_openspace=25.12 best=15.74
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.24 rssi_openspace=31.62 best=13.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.74 phase_slope=24.40 rssi_openspace=17.78 best=15.74
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.05 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: poor
+Distance estimates: mcpd: ifft=15.94 phase_slope=24.87 rssi_openspace=25.12 best=15.94
+Measurement result:
+Addr: FC:90:0F:C9:6E:24 (random)
+Quality: crc fail
+Distance estimates: mcpd: ifft=13.18 phase_slope=16.47 rssi_openspace=25.12 best=13.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.67 phase_slope=24.46 rssi_openspace=15.85 best=15.67
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.74 phase_slope=24.14 rssi_openspace=15.85 best=15.74
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.77 phase_slope=23.70 rssi_openspace=19.95 best=15.77
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.06 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.80 phase_slope=12.93 rssi_openspace=14.13 best=3.80
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.76 phase_slope=13.18 rssi_openspace=15.85 best=3.76
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.07 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.08 rssi_openspace=12.59 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.02 rssi_openspace=14.13 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.67 phase_slope=13.12 rssi_openspace=11.22 best=3.67
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: do not use
+Distance estimates: mcpd: ifft=3.62 phase_slope=12.09 rssi_openspace=44.67 best=3.62
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.57 rssi_openspace=14.13 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: do not use
+Distance estimates: mcpd: ifft=3.69 phase_slope=12.95 rssi_openspace=35.48 best=3.69
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.60 phase_slope=11.66 rssi_openspace=44.67 best=3.60
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.80 phase_slope=24.30 rssi_openspace=22.39 best=15.80
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.70 phase_slope=12.95 rssi_openspace=25.12 best=3.70
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.77 phase_slope=13.13 rssi_openspace=10.00 best=3.77
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.18 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: do not use
+Distance estimates: mcpd: ifft=3.69 phase_slope=11.89 rssi_openspace=44.67 best=3.69
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.70 phase_slope=24.36 rssi_openspace=15.85 best=15.70
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.69 phase_slope=13.17 rssi_openspace=11.22 best=3.69
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: do not use
+Distance estimates: mcpd: ifft=3.62 phase_slope=12.14 rssi_openspace=44.67 best=3.62
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: poor
+Distance estimates: mcpd: ifft=3.71 phase_slope=13.10 rssi_openspace=22.39 best=3.71
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.76 phase_slope=24.57 rssi_openspace=25.12 best=15.76
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.71 phase_slope=13.62 rssi_openspace=8.91 best=3.71
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.69 phase_slope=24.28 rssi_openspace=19.95 best=15.69
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.75 phase_slope=24.59 rssi_openspace=25.12 best=15.75
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.72 phase_slope=13.04 rssi_openspace=11.22 best=3.72
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.68 phase_slope=13.45 rssi_openspace=11.22 best=3.68
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.68 phase_slope=13.04 rssi_openspace=8.91 best=3.68
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.68 phase_slope=13.45 rssi_openspace=10.00 best=3.68
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.68 phase_slope=13.34 rssi_openspace=11.22 best=3.68
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=11.17 rssi_openspace=11.22 best=7.32
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.66 phase_slope=13.74 rssi_openspace=12.59 best=3.66
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.77 phase_slope=24.31 rssi_openspace=25.12 best=15.77
+Measurement result:
+Addr: FE:5A:0F:0E:29:6F (random)
+Quality: ok
+Distance estimates: mcpd: ifft=3.65 phase_slope=13.26 rssi_openspace=11.22 best=3.65
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.75 phase_slope=24.15 rssi_openspace=19.95 best=15.75
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.77 phase_slope=24.42 rssi_openspace=25.12 best=15.77
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.79 phase_slope=24.33 rssi_openspace=22.39 best=15.79
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.53 phase_slope=24.71 rssi_openspace=17.78 best=15.53
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.32 phase_slope=10.79 rssi_openspace=10.00 best=7.32
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=10.63 rssi_openspace=10.00 best=7.03
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=6.74 phase_slope=11.00 rssi_openspace=10.00 best=6.74
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=8.20 phase_slope=10.86 rssi_openspace=11.22 best=8.20
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.41 phase_slope=24.71 rssi_openspace=19.95 best=15.41
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=6.74 phase_slope=11.17 rssi_openspace=8.91 best=6.74
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=11.04 rssi_openspace=10.00 best=7.03
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.49 phase_slope=25.03 rssi_openspace=15.85 best=15.49
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.03 phase_slope=11.18 rssi_openspace=8.91 best=7.03
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.23 phase_slope=24.76 rssi_openspace=19.95 best=9.23
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.63 phase_slope=24.41 rssi_openspace=22.39 best=15.63
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=7.91 phase_slope=11.16 rssi_openspace=10.00 best=7.91
+Measurement result:
+Addr: E4:B6:69:C8:DB:9D (random)
+Quality: ok
+Distance estimates: mcpd: ifft=6.74 phase_slope=11.15 rssi_openspace=7.94 best=6.74
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: do not use
+Distance estimates: mcpd: ifft=9.64 phase_slope=27.25 rssi_openspace=28.18 best=9.64
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=10.15 phase_slope=27.88 rssi_openspace=17.78 best=10.15
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.57 phase_slope=24.99 rssi_openspace=14.13 best=9.57
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.68 phase_slope=24.89 rssi_openspace=19.95 best=9.68
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=9.18 phase_slope=24.13 rssi_openspace=17.78 best=9.18
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=10.58 phase_slope=24.20 rssi_openspace=22.39 best=10.58
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.41 phase_slope=24.35 rssi_openspace=19.95 best=15.41
+Measurement result:
+Addr: F7:45:87:CA:E8:06 (random)
+Quality: ok
+Distance estimates: mcpd: ifft=15.37 phase_slope=24.74 rssi_openspace=22.39 best=15.37

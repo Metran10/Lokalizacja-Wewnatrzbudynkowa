@@ -1014,43 +1014,46 @@ anchors = [Anchor(boards[2], 0, 0, 1.9), #FE
 if __name__ == '__main__':
     print("START")
 
-    analyze_all_files("wyniki_pomiarów", "reporting", multilateration_type="2D", clear_failed_meas=True, )
-    loc_res_list = load_loc_res_from_file("reporting/results.pkl")
 
-    for anchor in anchors:
-        create_scatter_plots_for_anchor_minmax(loc_res_list, anchor=anchor, mult_type="avg", save_to_file=True,
-                                               report_dir='reporting//distance')
-        create_scatter_plots_for_anchor_minmax(loc_res_list, anchor=anchor, mult_type="med", save_to_file=True,
-                                               report_dir='reporting//distance')
-    create_schema_with_results(loc_res_list, mult_type='avg', save_to_file=True, report_dir='reporting//localisation')
-    create_schema_with_results(loc_res_list, mult_type='med', save_to_file=True, report_dir='reporting//localisation')
-    create_heat_map_with_results(loc_res_list, mult_type='avg', save_to_file=True, report_dir='reporting//heatmap')
-    create_heat_map_with_results(loc_res_list, mult_type='med', save_to_file=True, report_dir='reporting//heatmap')
-    # for loc_res in loc_res_list:
-    #     print(f'POINT: ({loc_res.x}, {loc_res.y})')
-    #     print(f'MIN: {loc_res.get_min_measurements_per_anchor("FE:5A:0F:0E:29:6F")}')
-    #     print(f'MAX: {loc_res.get_max_measurements_per_anchor("FE:5A:0F:0E:29:6F")}')
-    #     for avg in loc_res.avg_meas:
-    #         if avg.anchor.split(":")[0] == "FE":
-    #             print(f'AVG: {avg}')
+    # analyze_all_files("wyniki_pomiarów", "reporting", multilateration_type="2D", clear_failed_meas=True, )
+    loc_res_list = load_loc_res_from_file("reporting/results.pkl") #lista obiektów klasy location_measurement_results
+    print(loc_res_list[0].avg_mult)
 
-    bias_dict_reg = {'FE': {'IFFT': 0.97, 'PHASE': 6.50, 'RSSI': 0, 'BEST': 0.97},
-                     'E4': {'IFFT': 1.12, 'PHASE': 3.07, 'RSSI': 0, 'BEST': 1.12},
-                     'F7': {'IFFT': 0.09, 'PHASE': 2.11, 'RSSI': 0, 'BEST': 0.09},
-                     'FC': {'IFFT': 1.44, 'PHASE': 4.16, 'RSSI': 0, 'BEST': 1.44}}
     #
-    analyze_all_files("wyniki_pomiarów", "testowe", multilateration_type='2D', clear_failed_meas=True, bias=bias_dict_reg)
-    loc_res_unbiased = load_loc_res_from_file("testowe/results.pkl")
-
-    for anchor in anchors:
-        create_scatter_plots_for_anchor_minmax(loc_res_unbiased, anchor=anchor, mult_type="avg", save_to_file=True,
-                                               report_dir='reporting//distance_bias')
-        create_scatter_plots_for_anchor_minmax(loc_res_unbiased, anchor=anchor, mult_type="med", save_to_file=True,
-                                               report_dir='reporting//distance_bias')
-
-
-    create_schema_with_results(loc_res_unbiased, mult_type='avg', save_to_file=True, report_dir='reporting//localisation_bias')
-    create_schema_with_results(loc_res_unbiased, mult_type='med', save_to_file=True, report_dir='reporting//localisation_bias')
-    create_heat_map_with_results(loc_res_unbiased, mult_type='avg', save_to_file=True, report_dir='reporting//heatmap_bias')
-    create_heat_map_with_results(loc_res_unbiased, mult_type='med', save_to_file=True, report_dir='reporting//heatmap_bias')
+    # for anchor in anchors:
+    #     create_scatter_plots_for_anchor_minmax(loc_res_list, anchor=anchor, mult_type="avg", save_to_file=True,
+    #                                            report_dir='reporting//distance')
+    #     create_scatter_plots_for_anchor_minmax(loc_res_list, anchor=anchor, mult_type="med", save_to_file=True,
+    #                                            report_dir='reporting//distance')
+    # create_schema_with_results(loc_res_list, mult_type='avg', save_to_file=True, report_dir='reporting//localisation')
+    # create_schema_with_results(loc_res_list, mult_type='med', save_to_file=True, report_dir='reporting//localisation')
+    # create_heat_map_with_results(loc_res_list, mult_type='avg', save_to_file=True, report_dir='reporting//heatmap')
+    # create_heat_map_with_results(loc_res_list, mult_type='med', save_to_file=True, report_dir='reporting//heatmap')
+    # # for loc_res in loc_res_list:
+    # #     print(f'POINT: ({loc_res.x}, {loc_res.y})')
+    # #     print(f'MIN: {loc_res.get_min_measurements_per_anchor("FE:5A:0F:0E:29:6F")}')
+    # #     print(f'MAX: {loc_res.get_max_measurements_per_anchor("FE:5A:0F:0E:29:6F")}')
+    # #     for avg in loc_res.avg_meas:
+    # #         if avg.anchor.split(":")[0] == "FE":
+    # #             print(f'AVG: {avg}')
+    #
+    # bias_dict_reg = {'FE': {'IFFT': 0.97, 'PHASE': 6.50, 'RSSI': 0, 'BEST': 0.97},
+    #                  'E4': {'IFFT': 1.12, 'PHASE': 3.07, 'RSSI': 0, 'BEST': 1.12},
+    #                  'F7': {'IFFT': 0.09, 'PHASE': 2.11, 'RSSI': 0, 'BEST': 0.09},
+    #                  'FC': {'IFFT': 1.44, 'PHASE': 4.16, 'RSSI': 0, 'BEST': 1.44}}
+    # #
+    # analyze_all_files("wyniki_pomiarów", "testowe", multilateration_type='2D', clear_failed_meas=True, bias=bias_dict_reg)
+    # loc_res_unbiased = load_loc_res_from_file("testowe/results.pkl")
+    #
+    # for anchor in anchors:
+    #     create_scatter_plots_for_anchor_minmax(loc_res_unbiased, anchor=anchor, mult_type="avg", save_to_file=True,
+    #                                            report_dir='reporting//distance_bias')
+    #     create_scatter_plots_for_anchor_minmax(loc_res_unbiased, anchor=anchor, mult_type="med", save_to_file=True,
+    #                                            report_dir='reporting//distance_bias')
+    #
+    #
+    # create_schema_with_results(loc_res_unbiased, mult_type='avg', save_to_file=True, report_dir='reporting//localisation_bias')
+    # create_schema_with_results(loc_res_unbiased, mult_type='med', save_to_file=True, report_dir='reporting//localisation_bias')
+    # create_heat_map_with_results(loc_res_unbiased, mult_type='avg', save_to_file=True, report_dir='reporting//heatmap_bias')
+    # create_heat_map_with_results(loc_res_unbiased, mult_type='med', save_to_file=True, report_dir='reporting//heatmap_bias')
 

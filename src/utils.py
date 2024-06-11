@@ -5,9 +5,9 @@ import re
 
 class measurement:
     def __init__(self, anchor, quality, high_precision, ifft, phase_slope, rssi_openspace, best):
-        self.anchor = anchor
-        self.quality = quality
-        self.high_precision = high_precision
+        self.anchor = anchor #adres kotwicy
+        self.quality = quality #string reprezentujacy jakosc pomiaru podany przez program na plytce: do lokalizacji filtrowany tylko na "ok"
+        self.high_precision = high_precision #v  wyniki estymacji dla poszczególnych algorytmów w postaci float
         self.ifft = ifft
         self.phase_slope = phase_slope
         self.rssi_openspace = rssi_openspace
@@ -19,7 +19,7 @@ class measurement:
 
 class Anchor:
     def __init__(self, name, x, y, z):
-        self.name = name
+        self.name = name #adres kotwicy
         self.x_cord = x
         self.y_cord = y
         self.z_cord = z
@@ -32,11 +32,11 @@ class location_measurements_results:
     def __init__(self, x, y, meas_dict, avg_meas, med_meas, avg_mult, med_mult):
         self.x = x
         self.y = y
-        self.meas_dict = meas_dict #wszystkie pomiary danego punktu w slowniku kotwic
-        self.avg_meas = avg_meas #lista obiektów measurement
-        self.med_meas = med_meas
-        self.avg_mult = avg_mult
-        self.med_mult = med_mult
+        self.meas_dict = meas_dict #wszystkie pomiary danego punktu w slowniku z zazwami kotwic jako kluczami
+        self.avg_meas = avg_meas #lista obiektów measurement ze srednimi wartosciami pomiarow dla kazdej kotwicy
+        self.med_meas = med_meas #^to samo tylko z medianą
+        self.avg_mult = avg_mult #słownik obiektów klasy mult_result na podstawie srednich wartosci z nazwami algorytmów estymacji jako kluczami
+        self.med_mult = med_mult #^to samo tylko na podstawie mediany
         pass
 
     def __str__(self):
@@ -55,20 +55,6 @@ class location_measurements_results:
         return dict
 
     def get_min_measurements_per_anchor(self, anchor_name):
-        # min_ifft = self.meas_dict[anchor_name][0].ifft
-        # min_phase_slope = self.meas_dict[anchor_name][0].phase_slope
-        # min_rssi_openspace = self.meas_dict[anchor_name][0].rssi_openspace
-        # min_best = self.meas_dict[anchor_name][0].best
-        # #cos tu jest nie tak
-        # for meas in self.meas_dict[anchor_name]:
-        #     if meas.ifft < min_ifft:
-        #         min_ifft = meas.ifft
-        #     if meas.phase_slope < min_phase_slope:
-        #         min_phase_slope = meas.phase_slope
-        #     if meas.rssi_openspace < min_rssi_openspace:
-        #         min_rssi_openspace = meas.rssi_openspace
-        #     if meas.best < min_best:
-        #         min_best = meas.best
         ifft_values =[]
         phase_values = []
         rssi_values = []
@@ -89,27 +75,28 @@ class location_measurements_results:
         return {"IFFT": min_ifft, "PHASE": min_phase_slope, "RSSI": min_rssi_openspace, "BEST": min_best}
 
     def get_max_measurements_per_anchor(self, anchor_name):
-        max_ifft = self.meas_dict[anchor_name][0].ifft
-        max_phase_slope = self.meas_dict[anchor_name][0].phase_slope
-        max_rssi_openspace = self.meas_dict[anchor_name][0].rssi_openspace
-        max_best = self.meas_dict[anchor_name][0].best
+        ifft_values = []
+        phase_values = []
+        rssi_values = []
+        best_values = []
 
         for meas in self.meas_dict[anchor_name]:
-            if meas.ifft > max_ifft:
-                max_ifft = meas.ifft
-            if meas.phase_slope > max_phase_slope:
-                max_phase_slope = meas.phase_slope
-            if meas.rssi_openspace > max_rssi_openspace:
-                max_rssi_openspace = meas.rssi_openspace
-            if meas.best > max_best:
-                max_best = meas.best
+            ifft_values.append(meas.ifft)
+            phase_values.append(meas.phase_slope)
+            rssi_values.append(meas.rssi_openspace)
+            best_values.append(meas.best)
+
+        max_ifft = max(ifft_values)
+        max_phase_slope = max(phase_values)
+        max_rssi_openspace = max(rssi_values)
+        max_best = max(best_values)
 
         return {"IFFT": max_ifft, "PHASE": max_phase_slope, "RSSI": max_rssi_openspace, "BEST": max_best}
 
-
+#wynik multilateracji
 class mult_result:
     def __init__(self, type, x, y, z, distance_from_point):
-        self.type = type
+        self.type = type #który algorytm
         self.x = x
         self.y = y
         self.z = z

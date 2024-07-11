@@ -16,7 +16,8 @@ import json
 from utils import *
 from schema import make_default_schema
 from scipy.stats import linregress
-
+from matplotlib.colors import LinearSegmentedColormap
+from scipy.optimize import curve_fit
 
 boards = [
     "FC:90:0F:C9:6E:24",
@@ -544,7 +545,9 @@ def sub_bias(sorted_meas, bias):
         for meas in sorted_meas[anchor]:
             meas.ifft = float(meas.ifft) - float(bias[anchor.split(":")[0]]['IFFT'])
             meas.phase_slope = float(meas.phase_slope) - float(bias[anchor.split(":")[0]]['PHASE'])
-            meas.rssi_openspace = float(meas.rssi_openspace) - float(bias[anchor.split(":")[0]]['RSSI'])
+            meas.rssi_openspace = (float(meas.rssi_openspace) - float(bias[anchor.split(":")[0]]['RSSI']))/1.35
+            if meas.rssi_openspace < 0:
+                meas.rssi_openspace = 0.01
             meas.best = float(meas.best) - float(bias[anchor.split(":")[0]]['BEST'])
 
     return sorted_meas
@@ -832,11 +835,12 @@ def create_scatter_plots_for_anchor_minmax(loc_res_list, anchor, mult_type="avg"
                               linestyle='-', linewidth=0.2)
             #regresja
             if regression:
-                slope, intercept, _,_, _ = linregress(true_distances, measured_distances_ifft)
+                slope, intercept, r_value,_, _ = linregress(true_distances, measured_distances_ifft)
                 x_vals = np.array(true_distances)
                 y_vals = x_vals + intercept
                 ax1.plot(x_vals, y_vals, color='black', linestyle='--', linewidth=0.5)
                 print(f"INTERCEPT {mult_type} IFFT {anchor.name}: y=x+{intercept:.2f}")
+                print(f'R^2: {r_value**2}')
 
             ax1.plot(true_distances, true_distances, color='black', linestyle='--')
 
@@ -857,11 +861,15 @@ def create_scatter_plots_for_anchor_minmax(loc_res_list, anchor, mult_type="avg"
             ax2.set_ylim(0,30)
             #regresja
             if regression:
-                slope, intercept, _, _, _ = linregress(true_distances, measured_distances_phase)
+                slope, intercept, r_value, _, _ = linregress(true_distances, measured_distances_phase)
                 x_vals = np.array(true_distances)
                 y_vals = x_vals + intercept
                 ax2.plot(x_vals, y_vals, color='black', linestyle='--', linewidth=0.5)
                 print(f"INTERCEPT {mult_type} PHASE {anchor.name}: y=x+{intercept:.2f}")
+                print(f'R^2: {r_value ** 2}')
+
+
+
 
             ax2.plot(true_distances, true_distances, color='black', linestyle='--')
 
@@ -870,7 +878,7 @@ def create_scatter_plots_for_anchor_minmax(loc_res_list, anchor, mult_type="avg"
             ax2.grid(True)
 
             ax2.set_title(f'{type}')
-            ax2.legend()
+            #ax2.legend()
         elif type == "RSSI":
             plot = ax3.scatter(true_distances, measured_distances_rssi, color='blue')
             ax3.scatter(true_distances, measured_distances_rssi_min, color='black', marker='2', s=11)
@@ -880,12 +888,14 @@ def create_scatter_plots_for_anchor_minmax(loc_res_list, anchor, mult_type="avg"
                               [measured_distances_rssi_min[i], measured_distances_rssi_max[i]], color='black',
                               linestyle='-', linewidth=0.2)
             #regresja
-            # if regression:
-            #     slope, intercept, _, _, _ = linregress(true_distances, measured_distances_rssi)
-            #     x_vals = np.array(true_distances)
-            #     y_vals = x_vals + intercept
-            #     axes[id].plot(x_vals, y_vals, color='black', linestyle='--', linewidth=0.5)
-            #     print(f"INTERCEPT {mult_type} RSSI {anchor.name}: y=x+{intercept:.2f}")
+            if regression:
+                slope, intercept, r_value, _, _ = linregress(true_distances, measured_distances_rssi)
+                x_vals = np.array(true_distances)
+                y_vals = slope * x_vals + intercept
+                ax3.plot(x_vals, y_vals, color='black', linestyle='--', linewidth=0.5)
+                print(f"INTERCEPT {mult_type} RSSI {anchor.name}: y=x+{intercept:.2f}")
+                print(f'SLOPE: {slope}')
+                print(f'R^2: {r_value ** 2}')
 
             ax3.set_ylim(0,40)
             ax3.plot(true_distances, true_distances, color='black', linestyle='--')
@@ -895,7 +905,7 @@ def create_scatter_plots_for_anchor_minmax(loc_res_list, anchor, mult_type="avg"
             ax3.grid(True)
 
             ax3.set_title(f'{type}')
-            ax3.legend()
+
         # elif type == "BEST":
         #     plot = axes[id].scatter(true_distances, measured_distances_best, color='orange')
         #     axes[id].scatter(true_distances, measured_distances_best_min, color='black', marker='2', s=11)
@@ -1009,6 +1019,14 @@ def calculate_distances_heatmap(localized_points, real_points):
         distances.append(distance)
     return distances
 
+my_cmaps = {
+    'RED': LinearSegmentedColormap.from_list("my_red", [(0,'lightcoral'), (0.5, 'red'), (1, 'darkred')], N=256),
+    'BLUE': LinearSegmentedColormap.from_list("my_blue", [(0,'lightblue'), (0.5, 'blue'), (1, 'darkblue')], N=256),
+    'GREEN': LinearSegmentedColormap.from_list("my_green", [(0,'lightgreen'), (0.5, 'green'), (1, 'darkgreen')], N=256),
+    'PURPLE': LinearSegmentedColormap.from_list("my_green", [(0,'lavender'), (0.5, 'purple'), (1, 'indigo')], N=256)
+}
+
+
 def add_heatmap_to_schema(ax, localized_points, real_points, cmap='viridis', vmin=None, vmax=None):
     distances = calculate_distances_heatmap(localized_points, real_points)
     sc = ax.scatter(*zip(*real_points), c=distances, cmap=cmap, s=50, vmin=vmin, vmax=vmax)
@@ -1018,7 +1036,6 @@ def create_heat_map_with_results(loc_res_list, mult_type='avg', save_to_file=Tru
     localized_points_ifft = []
     localized_points_phase = []
     localized_points_rssi = []
-    localized_points_best = []
     real_points = []
 
     for loc_res in loc_res_list:
@@ -1028,38 +1045,10 @@ def create_heat_map_with_results(loc_res_list, mult_type='avg', save_to_file=Tru
             localized_points_ifft.append((loc_res.avg_mult['IFFT'].x, loc_res.avg_mult['IFFT'].y))
             localized_points_phase.append((loc_res.avg_mult['PHASE'].x, loc_res.avg_mult['PHASE'].y))
             localized_points_rssi.append((loc_res.avg_mult['RSSI'].x, loc_res.avg_mult['RSSI'].y))
-            localized_points_best.append((loc_res.avg_mult['BEST'].x, loc_res.avg_mult['BEST'].y))
-
         elif mult_type == 'med':
             localized_points_ifft.append((loc_res.med_mult['IFFT'].x, loc_res.med_mult['IFFT'].y))
             localized_points_phase.append((loc_res.med_mult['PHASE'].x, loc_res.med_mult['PHASE'].y))
             localized_points_rssi.append((loc_res.med_mult['RSSI'].x, loc_res.med_mult['RSSI'].y))
-            localized_points_best.append((loc_res.med_mult['BEST'].x, loc_res.med_mult['BEST'].y))
-
-    # fig, axes = plt.subplots(2, 2, figsize=(15, 15))
-    #
-    # make_default_schema(axes[0, 0])
-    # make_default_schema(axes[0, 1])
-    # make_default_schema(axes[1, 0])
-    # make_default_schema(axes[1, 1])
-    #
-    # distances_ifft = calculate_distances_heatmap(localized_points_ifft, real_points)
-    # distances_phase = calculate_distances_heatmap(localized_points_phase, real_points)
-    # distances_rssi = calculate_distances_heatmap(localized_points_rssi, real_points)
-    # distances_best = calculate_distances_heatmap(localized_points_best, real_points)
-    #
-    # all_distances = distances_ifft + distances_phase + distances_rssi + distances_best
-    # vmin = min(all_distances)
-    # vmax = max(all_distances)
-    #
-    # add_heatmap_to_schema(axes[0, 0], localized_points_ifft, real_points, cmap='Reds',vmin=vmin, vmax=vmax)
-    # axes[0, 0].set_title("IFFT")
-    # add_heatmap_to_schema(axes[0, 1], localized_points_phase, real_points, cmap='Greens',vmin=vmin, vmax=vmax)
-    # axes[0, 1].set_title("PHASE")
-    # add_heatmap_to_schema(axes[1, 0], localized_points_rssi, real_points, cmap='Purples',vmin=vmin, vmax=vmax)
-    # axes[1, 0].set_title("RSSI")
-    # add_heatmap_to_schema(axes[1, 1], localized_points_best, real_points, cmap='Oranges',vmin=vmin, vmax=vmax)
-    # axes[1, 1].set_title("BEST")
 
     fig = plt.figure(figsize=(15, 15))
     gs = GridSpec(4, 4, figure=fig)
@@ -1079,11 +1068,11 @@ def create_heat_map_with_results(loc_res_list, mult_type='avg', save_to_file=Tru
     vmin = min(all_distances)
     vmax = max(all_distances)
 
-    add_heatmap_to_schema(ax1, localized_points_ifft, real_points, cmap='Reds', vmin=vmin, vmax=vmax)
+    add_heatmap_to_schema(ax1, localized_points_ifft, real_points, cmap=my_cmaps['RED'], vmin=0.5, vmax=15)
     ax1.set_title("IFFT")
-    add_heatmap_to_schema(ax2, localized_points_phase, real_points, cmap='Greens', vmin=vmin, vmax=vmax)
+    add_heatmap_to_schema(ax2, localized_points_phase, real_points, cmap=my_cmaps['GREEN'], vmin=0.5, vmax=15)
     ax2.set_title("PHASE")
-    add_heatmap_to_schema(ax3, localized_points_rssi, real_points, cmap='Purples', vmin=vmin, vmax=vmax)
+    add_heatmap_to_schema(ax3, localized_points_rssi, real_points, cmap=my_cmaps['PURPLE'], vmin=0.5, vmax=15)
     ax3.set_title("RSSI")
 
 
@@ -1277,8 +1266,13 @@ def create_loc_error_hist_comparision(error_list, error_list_bias, bins=20, alg_
     color='skyblue'
 
     fig, axes = plt.subplots(nrows=2, ncols=1, figsize=(10, 10))
+
+    min_error = min(min(error_list), min(error_list_bias))
+    max_error = max(max(error_list), max(error_list_bias))
+    common_bins = np.linspace(min_error, max_error, bins)
+
     #przed korekta
-    counts, bins, patches = axes[0].hist(error_list, bins=bins, color='skyblue', edgecolor='black')
+    counts, bins, patches = axes[0].hist(error_list, bins=common_bins, color='skyblue', edgecolor='black')
 
     quantiles = np.percentile(error_list, [25, 50, 75, 90, 95])
     quantiles_labels = ['25%', '50%', '75%', '90%', '95%']
@@ -1292,21 +1286,39 @@ def create_loc_error_hist_comparision(error_list, error_list_bias, bins=20, alg_
     axes[0].set_xlabel("Błąd [m]")
     axes[0].set_ylabel("Wystąpienia")
     axes[0].grid(axis='y', alpha=0.75)
+
+    if alg_type == 'PHASE':
+        print("PRE")
+        print(quantiles)
+        print(len(error_list))
     #po korekcie
-    counts, bins, patches = axes[1].hist(error_list_bias, bins=bins, color='skyblue', edgecolor='black')
+    counts_bias, bins_bias, patches_bias = axes[1].hist(error_list_bias, bins=common_bins, color='skyblue', edgecolor='black')
 
-    quantiles = np.percentile(error_list_bias, [25, 50, 75, 90, 95])
-    quantiles_labels = ['25%', '50%', '75%', '90%', '95%']
 
-    for quantile, label in zip(quantiles, quantiles_labels):
+
+
+    quantiles_bias = np.percentile(error_list_bias, [25, 50, 75, 90, 95])
+    quantiles_labels_bias = ['25%', '50%', '75%', '90%', '95%']
+
+    for quantile, label in zip(quantiles_bias, quantiles_labels_bias):
         axes[1].axvline(quantile, color='black', linestyle='dashed', linewidth=2)
-        axes[1].text(quantile, max(counts) * 0.9, f'{label}\n{quantile:.2f}', color='black', ha='right', va='center')
+        axes[1].text(quantile, max(counts_bias) * 0.9, f'{label}\n{quantile:.2f}', color='black', ha='right', va='center')
 
     axes[1].set_title(
         f"Histogram Błędów Lokalizacji {alg_type} z wykorzystaniem {'średniej z' if mult_type == 'avg' else 'mediany z'} pomiarów  po korekcie")
     axes[1].set_xlabel("Błąd [m]")
     axes[1].set_ylabel("Wystąpienia")
     axes[1].grid(axis='y', alpha=0.75)
+
+    if alg_type == 'PHASE':
+        print("POST")
+        print(quantiles_bias)
+        print(len(error_list_bias))
+        print(error_list_bias)
+
+    # max_bin=max(max(bins), max(bins_bias))
+    # axes[0].set_xlim([0, 20])
+    # axes[1].set_xlim([-5, 20])
 
     if save_to_file:
         file_name = f".//{report_dir}//" + f"error_hist_{mult_type}_{alg_type}_comparision.png"
@@ -1373,9 +1385,14 @@ def create_dist_error_histogram_for_anchor(loc_res_list, anchor, bins, type, alg
     #     color = 'green'
     # elif algorithm == 'RSSI':
     #     color = 'blue'
+
+
+
     error_list = get_distance_errors(loc_res_list, anchor, type=type)
     print(anchor.name)
     print(f'{algorithm} srednio: {np.mean(error_list[algorithm])}')
+
+
 
     plt.figure(figsize=(10, 6))
     counts, bins, patches = plt.hist(error_list[algorithm], bins=bins, color=color, edgecolor='black', alpha=0.75)
@@ -1402,9 +1419,17 @@ def create_dist_error_hist_comparision_for_anchor(loc_res_list, loc_res_list_bia
     print(anchor.name)
     color='skyblue'
 
+    print("COMP")
+    print(error_list)
+    print(error_list_bias)
+
+    min_error = min(min(error_list[algorithm]), min(error_list_bias[algorithm]))
+    max_error = max(max(error_list[algorithm]), max(error_list_bias[algorithm]))
+    common_bins = np.linspace(min_error, max_error, bins)
+
     fig, axes = plt.subplots(nrows=2, ncols=1, figsize=(10, 10))
     #normal
-    counts, bins, patches = axes[0].hist(error_list[algorithm], bins=bins, color=color, edgecolor='black', alpha=0.75)
+    counts, bins, patches = axes[0].hist(error_list[algorithm], bins=common_bins, color=color, edgecolor='black', alpha=0.75)
     quantiles = np.percentile(error_list[algorithm], [25, 50, 75, 90, 95])
     quantiles_labels = ['25%', '50%', '75%', '90%', '95%']
     print(f"SREDNI BLAD pre: {np.mean(error_list[algorithm])}")
@@ -1418,7 +1443,7 @@ def create_dist_error_hist_comparision_for_anchor(loc_res_list, loc_res_list_bia
     axes[0].grid(axis='y', alpha=0.75)
     axes[0].set_xlim(x_lim)
 
-    counts, bins, patches = axes[1].hist(error_list_bias[algorithm], bins=bins, color=color, edgecolor='black', alpha=0.75)
+    counts, bins, patches = axes[1].hist(error_list_bias[algorithm], bins=common_bins, color=color, edgecolor='black', alpha=0.75)
     quantiles = np.percentile(error_list_bias[algorithm], [25, 50, 75, 90, 95])
     quantiles_labels = ['25%', '50%', '75%', '90%', '95%']
 
@@ -1438,6 +1463,49 @@ def create_dist_error_hist_comparision_for_anchor(loc_res_list, loc_res_list_bia
 
     plt.show()
     pass
+
+
+def create_cdf_dist_plot_anchor(loc_res_list, loc_res_list_bias, anchor):
+    print(anchor.name)
+    error_list = get_distance_errors(loc_res_list, anchor, type='avg')
+    error_list_bias = get_distance_errors(loc_res_list_bias, anchor, type='avg')
+
+    error_dict ={
+        'IFFT': error_list['IFFT'],
+        'PHASE': error_list['PHASE'],
+        'RSSI': error_list['RSSI'],
+        'IFFT - korekcja': error_list_bias['IFFT'],
+        'PHASE - korekcja': error_list_bias['PHASE'],
+        'RSSI - korekcja': error_list_bias['RSSI']
+    }
+    plt.figure(figsize=(10,10))
+    colors = {
+        'IFFT': 'red',
+        'PHASE': 'green',
+        'RSSI': 'blue'
+    }
+
+    for alg, errors in error_dict.items():
+        sorted_data, cdf = compute_cdf(errors)
+        color = colors[alg.replace(' - korekcja', '')]
+        linestyle = '--' if '- korekcja' in alg else '-'
+
+        plt.plot(sorted_data, cdf, label=alg, linestyle=linestyle, color=color, linewidth=3)
+
+    plt.xlabel('Błąd pomiaru odległości [m]')
+    plt.xlim(0, 15)
+    #plt.ylabel('Skumulowane Prawdopodobieństwo')
+    plt.ylim(0, 1)
+    #plt.title('CDF Błędów lokalizacji')
+    plt.grid(True)
+    plt.legend()
+
+    plt.show()
+
+
+
+
+
 def __get_rssi_distances_from_anchro(loc_res_list, anchor):
     rssi_values = []
 
@@ -1472,6 +1540,85 @@ def create_rssi_free_space_loss_chart(rssi_distances):
     plt.ylabel('RSSI [dBm]', fontsize=18)
     plt.grid(True)
     plt.legend()
+    plt.show()
+
+
+def log_func(x, a, b):
+    return a * np.log10(x) + b
+def create_rssi_free_space_loss_real(loc_res_list, anchor):
+    rssi_values = []
+    real_distances = []
+
+    for loc_res in loc_res_list:
+        for anch_meas in loc_res.avg_meas:
+            if anch_meas.anchor == anchor.name:
+                rssi_values.append(anch_meas.rssi_openspace)
+
+        rd = euclidean_dist_2points((loc_res.x, loc_res.y), (anchor.x_cord, anchor.y_cord))
+        real_distances.append(rd)
+
+    sorted_pairs = sorted(zip(real_distances, rssi_values))
+    real_distances, rssi_values = zip(*sorted_pairs)
+
+    real_distances = list(real_distances)
+    rssi_values = list(rssi_values)
+
+    plt.figure(figsize=(10, 10))
+
+    frequency = 2.4e9
+    c= 3e8
+    fspl_values= 20 * np.log10(rssi_values) + 20 *  np.log10(frequency) + 20 * np.log10(4 * np.pi / c)
+    fspl_values = - fspl_values
+    plt.scatter(real_distances, fspl_values, label='Pomiary RSSI', color='red')
+
+    popt, pcov = curve_fit(log_func, real_distances, fspl_values)
+
+
+    fitted_rssi = log_func(np.array(real_distances), *popt)
+
+
+    plt.plot(real_distances, fitted_rssi, label='Model FSPL', color='blue')
+
+
+    plt.xlabel("Zmierzona odległość [m]")
+    plt.ylabel('RSSI [dBm]')
+    plt.grid(True)
+    plt.title("Przybliżony wpływ odległości na zmierzone RSSI")
+    plt.legend()
+    plt.show()
+
+
+def compute_cdf(data):
+    sorted_data = np.sort(data)
+    cdf = np.arange(1, len(sorted_data)+1) / len(sorted_data)
+    return sorted_data, cdf
+
+def create_cdf_loc_plot(error_dict):
+    plt.figure(figsize=(10, 10))
+    #print(error_dict)
+
+    colors = {
+        'IFFT': 'red',
+        'PHASE': 'green',
+        'RSSI': 'blue'
+    }
+
+    for alg, errors in error_dict.items():
+        sorted_data, cdf = compute_cdf(errors)
+        color = colors[alg.replace(' - korekcja', '')]
+        linestyle = '--' if '- korekcja' in alg else '-'
+
+        plt.plot(sorted_data, cdf, label=alg, linestyle=linestyle, color=color, linewidth=3)
+
+    plt.xlabel('Błąd lokalizacji [m]')
+    plt.xlim(0,13)
+    plt.ylabel(' Skumulowane Prawdopodobieństwo')
+    plt.ylim(0,1)
+    plt.title('Skumulowana funkcja rozkładu błędów lokalizacji')
+    plt.grid(True)
+    plt.legend()
+
+
     plt.show()
 
 
@@ -1519,6 +1666,25 @@ def print_loc_results(loc_res_list):
               f"RSSI: ({loc_res.avg_mult['RSSI'].x}, {loc_res.avg_mult['RSSI'].y})")
 
 
+def save_clear_meas_to_csv(meas_file_name, output_file_name):
+    ml = read_measurements(meas_file_name)
+    print(ml)
+
+    sorted_list = sort_measurements_for_anchor(ml)
+    print(sorted_list)
+
+    with pd.ExcelWriter(output_file_name, engine='openpyxl') as writer:
+        for sheet_name, data in sorted_list.items():
+            sheet_name = sheet_name.split(':')[0]
+
+            dict_list = [meas.to_dict() for meas in data]
+            df = pd.DataFrame(dict_list)
+            df.to_excel(writer, sheet_name=sheet_name, index=False)
+
+
+    pass
+
+
 anchors = [Anchor(boards[2], 0, 0, 1.9), #FE
            Anchor(boards[1], 10, 0, 1.9), #E4
            Anchor(boards[3], 0, 10, 1.9), #F7
@@ -1530,8 +1696,23 @@ if __name__ == '__main__':
 
 
     #analyze_all_files("wyniki_pomiarów", "reporting", multilateration_type="2D", clear_failed_meas=True, create_boxplots=False)
-    #loc_res_list = load_loc_res_from_file("reporting/results.pkl") #lista obiektów klasy location_measurement_results
+
+    save_clear_meas_to_csv("wyniki_pomiarów//Y5//e3_5.txt", "wynik_zapisany.xlsx")
+
+    loc_res_list = load_loc_res_from_file("reporting/results.pkl") #lista obiektów klasy location_measurement_results
     # print_loc_results(loc_res_list)
+    #create_rssi_free_space_loss_real(loc_res_list, anchors[3])
+
+    # for loc_res in loc_res_list:
+    #     print(f'({loc_res.x}, {loc_res.y})')
+    #     for anchor in loc_res.meas_dict.keys():
+    #         print(f'({anchor}): {len(loc_res.meas_dict[anchor])}')
+
+
+
+
+
+
 
 
     # error_dict = get_locations_error(loc_res_list, 'avg')
@@ -1548,9 +1729,9 @@ if __name__ == '__main__':
 
 
     # for anchor in anchors:
-    #     print(anchor.name)
-    #     print(get_avg_error_distance_meas_per_anchor(loc_res_list, anchor, type='med'))
-    #     create_dist_error_histogram_for_anchor(loc_res_list, anchor, bins=30, type='avg', algorithm='IFFT', save_to_file=True)
+    #     # print(anchor.name)
+    #     # print(get_avg_error_distance_meas_per_anchor(loc_res_list, anchor, type='med'))
+    #     # create_dist_error_histogram_for_anchor(loc_res_list, anchor, bins=30, type='avg', algorithm='IFFT', save_to_file=True)
     #     create_scatter_plots_for_anchor_minmax(loc_res_list, anchor=anchor, mult_type="avg", save_to_file=True,
     #                                             report_dir='reporting//distance')
         # create_scatter_plots_for_anchor_minmax(loc_res_list, anchor=anchor, mult_type="med", save_to_file=True,
@@ -1572,20 +1753,22 @@ if __name__ == '__main__':
     # #         if avg.anchor.split(":")[0] == "FE":
     # #             print(f'AVG: {avg}')
     #
-    bias_dict_reg = {'FE': {'IFFT': 0.97, 'PHASE': 6.50, 'RSSI': 0, 'BEST': 0.97},
-                     'E4': {'IFFT': 1.12, 'PHASE': 3.07, 'RSSI': 0, 'BEST': 1.12},
-                     'F7': {'IFFT': 0.09, 'PHASE': 2.11, 'RSSI': 0, 'BEST': 0.09},
-                     'FC': {'IFFT': 1.44, 'PHASE': 4.16, 'RSSI': 0, 'BEST': 1.44}}
+    bias_dict_reg = {'FE': {'IFFT': 0.97, 'PHASE': 6.50, 'RSSI': 6.45, 'BEST': 0.97},
+                     'E4': {'IFFT': 1.12, 'PHASE': 3.07, 'RSSI': 1.92, 'BEST': 1.12},
+                     'F7': {'IFFT': 0.09, 'PHASE': 2.11, 'RSSI': -1.11, 'BEST': 0.09},
+                     'FC': {'IFFT': 1.44, 'PHASE': 4.16, 'RSSI': -0.29, 'BEST': 1.44}}
+    #a =1.35
     bias_dict_reg_med = {
-        'FE': {'IFFT': 0.81, 'PHASE': 6.53, 'RSSI': 0, 'BEST': 0.81},
-        'E4': {'IFFT': 1.07, 'PHASE': 3.00, 'RSSI': 0, 'BEST': 1.07},
-        'F7': {'IFFT': 0.15, 'PHASE': 2.10, 'RSSI': 0, 'BEST': 0.15},
-        'FC': {'IFFT': 1.48, 'PHASE': 4.20, 'RSSI': 0, 'BEST': 1.48}
+        'FE': {'IFFT': 0.81, 'PHASE': 6.53, 'RSSI': 1.07, 'BEST': 0.81},
+        'E4': {'IFFT': 1.07, 'PHASE': 3.00, 'RSSI': 1.97, 'BEST': 1.07},
+        'F7': {'IFFT': 0.15, 'PHASE': 2.10, 'RSSI': -0.46, 'BEST': 0.15},
+        'FC': {'IFFT': 1.48, 'PHASE': 4.20, 'RSSI': -0.82, 'BEST': 1.48}
     }
+    #a=
 
 
     # analyze_all_files("wyniki_pomiarów", "testowe", multilateration_type='2D', clear_failed_meas=True, bias=bias_dict_reg)
-    #loc_res_unbiased = load_loc_res_from_file("testowe/results.pkl")
+    loc_res_unbiased = load_loc_res_from_file("testowe/results.pkl")
     #print_loc_results(loc_res_unbiased)
 
     #create_boxplots_for_loc_res_list(loc_res_unbiased, anchors, True)
@@ -1604,10 +1787,12 @@ if __name__ == '__main__':
 
 
     # for anchor in anchors:
-    #     # create_dist_error_hist_comparision_for_anchor(loc_res_list, loc_res_unbiased,anchor, bins=30, type='avg', algorithm='PHASE',
-    #     #                                         save_to_file=True, report_dir='reporting//dist_error_comparision', x_lim=(0,15))
-    #     create_dist_error_histogram_for_anchor(loc_res_unbiased, anchor, bins=30, type='avg', algorithm='RSSI',
-    #                                            save_to_file=True, report_dir='reporting//dist_error_histogram_bias', x_lim=(0,30))
+    #     print("HEEEEERREEEEEEE")
+    #     create_dist_error_hist_comparision_for_anchor(loc_res_list, loc_res_unbiased,anchor, bins=30, type='avg', algorithm='RSSI',
+    #                                             save_to_file=True, report_dir='reporting//dist_error_comparision', x_lim=(0,15))
+    #     create_cdf_dist_plot_anchor(loc_res_list, loc_res_unbiased, anchor)
+    # #     create_dist_error_histogram_for_anchor(loc_res_unbiased, anchor, bins=30, type='avg', algorithm='RSSI',
+    # #                                            save_to_file=True, report_dir='reporting//dist_error_histogram_bias', x_lim=(0,30))
     #     create_scatter_plots_for_anchor_minmax(loc_res_unbiased, anchor=anchor, mult_type="avg", save_to_file=True,
     #                                            report_dir='reporting//distance_bias')
     #     create_scatter_plots_for_anchor_minmax(loc_res_unbiased, anchor=anchor, mult_type="med", save_to_file=True,
@@ -1620,63 +1805,86 @@ if __name__ == '__main__':
     # create_heat_map_with_results(loc_res_unbiased, mult_type='med', save_to_file=True, report_dir='reporting//heatmap_bias')
 
     #ANALIZA LOKALIZACJI
-    for solver in ['LSE']:
-        # analyze_all_files("wyniki_pomiarów", f"reporting//loc//{solver}", multilateration_type="2D", clear_failed_meas=True,
-        #                   create_boxplots=False, solver=solver)
-        loc_res_list = load_loc_res_from_file(f"reporting//loc//{solver}//results.pkl")
-
-        # analyze_all_files("wyniki_pomiarów", f"reporting//loc//{solver}//bias", multilateration_type='2D', clear_failed_meas=True, create_boxplots=False,
-        #                   bias=bias_dict_reg, solver=solver)
-        loc_res_unbiased = load_loc_res_from_file(f"reporting//loc//{solver}//bias//results.pkl")
-
-        # create_schema_with_results(loc_res_list, mult_type='avg', save_to_file=True, report_dir=f'reporting//loc//{solver}//loc_clear')
-        # create_schema_with_results(loc_res_list, mult_type='med', save_to_file=True, report_dir=f'reporting//loc//{solver}//loc_clear')
-        # create_heat_map_with_results(loc_res_list, mult_type='avg', save_to_file=True, report_dir=f'reporting//loc//{solver}//heatmap_clear')
-        # create_heat_map_with_results(loc_res_list, mult_type='med', save_to_file=True, report_dir=f'reporting//loc//{solver}//heatmap_clear')
-        #
-        # create_schema_with_results(loc_res_unbiased, mult_type='avg', save_to_file=True,
-        #                            report_dir=f'reporting//loc//{solver}//loc_bias')
-        # create_schema_with_results(loc_res_unbiased, mult_type='med', save_to_file=True,
-        #                            report_dir=f'reporting//loc//{solver}//loc_bias')
-        # create_heat_map_with_results(loc_res_unbiased, mult_type='avg', save_to_file=True,
-        #                              report_dir=f'reporting//loc//{solver}//heatmap_bias')
-        # create_heat_map_with_results(loc_res_unbiased, mult_type='med', save_to_file=True,
-        #                              report_dir=f'reporting//loc//{solver}//heatmap_bias')
-
-        error_dict = get_locations_error(loc_res_list, 'avg')
-
-        print(error_dict)
-        error_dict_med = get_locations_error(loc_res_list, 'med')
-        # for alg in error_dict.keys():
-        #     print(f"AVG {alg}")
-        #     print(np.mean(error_dict[alg]))
-        #     print(f"MED {alg}")
-        #     print(np.mean(error_dict_med[alg]))
-
+    # for solver in ['LSE']:
+    #     print('re')
+    #     # analyze_all_files("wyniki_pomiarów", f"reporting//loc//{solver}", multilateration_type="2D", clear_failed_meas=True,
+    #     #                    create_boxplots=False, solver=solver)
+    #     loc_res_list = load_loc_res_from_file(f"reporting//loc//{solver}//results.pkl")
+    #
+    #     # analyze_all_files("wyniki_pomiarów", f"reporting//loc//{solver}//bias", multilateration_type='2D', clear_failed_meas=True, create_boxplots=False,
+    #     #                    bias=bias_dict_reg, solver=solver)
+    #     loc_res_unbiased = load_loc_res_from_file(f"reporting//loc//{solver}//bias//results.pkl")
+    #
+    #     for anchor in anchors:
+    #         create_scatter_plots_for_anchor_minmax(loc_res_list, anchor, mult_type='avg')
+    #         # create_dist_error_hist_comparision_for_anchor(loc_res_list, loc_res_unbiased, anchor, bins=30, type='avg',
+    #         #                                               algorithm='RSSI',
+    #         #                                               save_to_file=True, report_dir='reporting//dist_error_comparision', x_lim=(0,15))
+    #         create_scatter_plots_for_anchor_minmax(loc_res_unbiased, anchor, mult_type='avg', regression=False)
+    #         #create_cdf_dist_plot_anchor(loc_res_list, loc_res_unbiased, anchor)
+    #
+    #         # print(np.mean(get_distance_errors(loc_res_unbiased,anchor, 'avg')['RSSI']))
+    #
+    #
+    #
+    #
+    #     create_schema_with_results(loc_res_list, mult_type='avg', save_to_file=True, report_dir=f'reporting//loc//{solver}//loc_clear')
+    #     create_schema_with_results(loc_res_list, mult_type='med', save_to_file=True, report_dir=f'reporting//loc//{solver}//loc_clear')
+    #     create_heat_map_with_results(loc_res_list, mult_type='avg', save_to_file=True, report_dir=f'reporting//loc//{solver}//heatmap_clear')
+    #     create_heat_map_with_results(loc_res_list, mult_type='med', save_to_file=True, report_dir=f'reporting//loc//{solver}//heatmap_clear')
+    #
+    #     create_schema_with_results(loc_res_unbiased, mult_type='avg', save_to_file=True,
+    #                                report_dir=f'reporting//loc//{solver}//loc_bias')
+    #     create_schema_with_results(loc_res_unbiased, mult_type='med', save_to_file=True,
+    #                                report_dir=f'reporting//loc//{solver}//loc_bias')
+    #     create_heat_map_with_results(loc_res_unbiased, mult_type='avg', save_to_file=True,
+    #                                  report_dir=f'reporting//loc//{solver}//heatmap_bias')
+    #     create_heat_map_with_results(loc_res_unbiased, mult_type='med', save_to_file=True,
+    #                                  report_dir=f'reporting//loc//{solver}//heatmap_bias')
+    #
+    #     error_dict = get_locations_error(loc_res_list, 'avg')
+    #
+    #     error_dict_med = get_locations_error(loc_res_list, 'med')
+    #     # for alg in error_dict.keys():
+    #     #     print(f"AVG {alg}")
+    #     #     print(np.mean(error_dict[alg]))
+    #     #     print(f"MED {alg}")
+    #     #     print(np.mean(error_dict_med[alg]))
+    #
+    #
+    #
+    #     # for alg in ['IFFT', 'PHASE', 'RSSI']:
+    #     #     create_loc_error_histogram(error_dict[alg], bins=30, mult_type='avg', alg_type=alg,
+    #     #                                report_dir=f'reporting//loc//{solver}')
+    #     #     create_loc_error_histogram(error_dict_med[alg], bins=30, mult_type='med', alg_type=alg,
+    #     #                                report_dir=f'reporting//loc//{solver}')
+    #
+    #     error_dict_bias = get_locations_error(loc_res_unbiased, 'avg')
+    #     error_dict_med_bias = get_locations_error(loc_res_unbiased, 'med')
+    #
+    #
+    #     error_dict['IFFT - korekcja'] = error_dict_bias['IFFT']
+    #     error_dict['PHASE - korekcja'] = error_dict_bias['PHASE']
+    #     error_dict['RSSI - korekcja'] = error_dict_bias['RSSI']
+    #     create_cdf_loc_plot(error_dict)
+    #
+    #     for alg in error_dict.keys():
+    #         print(f"AVG {alg}")
+    #         print(round(np.mean(error_dict[alg]),2))
+    #         print(f"MED {alg}")
+    #         print(round(np.mean(error_dict[alg]),2))
+    #
+    #     create_loc_error_hist_comparision(error_dict['RSSI'], error_dict_bias['RSSI'], bins=30, mult_type='avg', alg_type='RSSI',
+    #                                       report_dir=f'reporting//loc//{solver}', isBias=True)
 
 
         # for alg in ['IFFT', 'PHASE', 'RSSI']:
-        #     create_loc_error_histogram(error_dict[alg], bins=30, mult_type='avg', alg_type=alg,
-        #                                report_dir=f'reporting//loc//{solver}')
-        #     create_loc_error_histogram(error_dict_med[alg], bins=30, mult_type='med', alg_type=alg,
-        #                                report_dir=f'reporting//loc//{solver}')
-
-        error_dict_bias = get_locations_error(loc_res_unbiased, 'avg')
-        error_dict_med_bias = get_locations_error(loc_res_unbiased, 'med')
-
-        for alg in error_dict.keys():
-            print(f"AVG {alg}")
-            print(np.mean(error_dict_bias[alg]))
-            print(f"MED {alg}")
-            print(np.mean(error_dict_med_bias[alg]))
-
-        # for alg in ['IFFT', 'PHASE', 'RSSI']:
-        #     # create_loc_error_histogram(error_dict_bias[alg], bins=30, mult_type='avg', alg_type=alg,
-        #     #                            report_dir=f'reporting//loc//{solver}', isBias=True)
-        #     # create_loc_error_histogram(error_dict_med_bias[alg], bins=30, mult_type='med', alg_type=alg,
-        #     #                            report_dir=f'reporting//loc//{solver}', isBias=True)
+        # #     # create_loc_error_histogram(error_dict_bias[alg], bins=30, mult_type='avg', alg_type=alg,
+        # #     #                            report_dir=f'reporting//loc//{solver}', isBias=True)
+        # #     # create_loc_error_histogram(error_dict_med_bias[alg], bins=30, mult_type='med', alg_type=alg,
+        # #     #                            report_dir=f'reporting//loc//{solver}', isBias=True)
         #     create_loc_error_hist_comparision(error_dict[alg],error_dict_bias[alg] , bins=30, mult_type='avg', alg_type=alg,
         #                                report_dir=f'reporting//loc//{solver}', isBias=True)
         #     create_loc_error_hist_comparision(error_dict_med[alg], error_dict_med_bias[alg], bins=30, mult_type='med',
-        #                                       alg_type=alg,
-        #                                       report_dir=f'reporting//loc//{solver}', isBias=True)
+        # #                                       alg_type=alg,
+        # #                                       report_dir=f'reporting//loc//{solver}', isBias=True)

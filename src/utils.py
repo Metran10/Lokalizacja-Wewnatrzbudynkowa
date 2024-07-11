@@ -16,6 +16,17 @@ class measurement:
     def __str__(self):
         return f"{self.anchor}: [HP: {self.high_precision}, IFFT: {self.ifft}, PS: {self.phase_slope}, RSSI: {self.rssi_openspace}, B: {self.best} "
 
+    def to_dict(self):
+        return {
+            'anchor': self.anchor,
+            'quality': self.quality,
+            'high_precision': self.high_precision,
+            'ifft': self.ifft,
+            'phase_slope': self.phase_slope,
+            'rssi_openspace': self.rssi_openspace,
+            'best': self.best
+        }
+
 
 class Anchor:
     def __init__(self, name, x, y, z):

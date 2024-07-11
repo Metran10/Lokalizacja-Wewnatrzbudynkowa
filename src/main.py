@@ -1666,7 +1666,7 @@ def print_loc_results(loc_res_list):
               f"RSSI: ({loc_res.avg_mult['RSSI'].x}, {loc_res.avg_mult['RSSI'].y})")
 
 
-def save_clear_meas_to_csv(meas_file_name, output_file_name):
+def save_clear_meas_to_excel(meas_file_name, output_file_name):
     ml = read_measurements(meas_file_name)
     print(ml)
 
@@ -1697,7 +1697,7 @@ if __name__ == '__main__':
 
     #analyze_all_files("wyniki_pomiarów", "reporting", multilateration_type="2D", clear_failed_meas=True, create_boxplots=False)
 
-    save_clear_meas_to_csv("wyniki_pomiarów//Y5//e3_5.txt", "wynik_zapisany.xlsx")
+    save_clear_meas_to_excel("wyniki_pomiarów//Y9//e3_9.txt", "wynik_e3_9.xlsx")
 
     loc_res_list = load_loc_res_from_file("reporting/results.pkl") #lista obiektów klasy location_measurement_results
     # print_loc_results(loc_res_list)

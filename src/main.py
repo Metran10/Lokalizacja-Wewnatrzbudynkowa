@@ -4,6 +4,7 @@ import pickle
 import re
 import csv
 import numpy as np
+import pandas
 #import localization as Loc
 import scipy as sc
 import localization as lx
@@ -14,7 +15,7 @@ from scipy.optimize import least_squares
 import statistics
 import json
 from utils import *
-from schema import make_default_schema
+from schema import make_default_schema, create_default_schema
 from scipy.stats import linregress
 from matplotlib.colors import LinearSegmentedColormap
 from scipy.optimize import curve_fit
@@ -942,6 +943,168 @@ def create_scatter_plots_for_anchor_minmax(loc_res_list, anchor, mult_type="avg"
     plt.show()
 
 
+def create_scatter_plots_for_anchor_all_methods(loc_res_list, anchor,anchor_name='Anchor 1', correction=False):
+    true_distances=[]
+
+    measured_dstiances_ifft=[]
+    measured_distances_phase=[]
+    measured_distances_rssi=[]
+
+    for loc_res in loc_res_list:
+        td = euclidean_dist_2points((loc_res.x, loc_res.y), (anchor.x_cord, anchor.y_cord))
+        true_distances.append(td)
+
+        for meas in loc_res.avg_meas:
+            if meas.anchor == anchor.name:
+                measured_dstiances_ifft.append(meas.ifft)
+                measured_distances_phase.append(meas.phase_slope)
+                measured_distances_rssi.append(meas.rssi_openspace)
+
+        #if len(tru)
+
+    fig = plt.figure(figsize = (10,10))
+    ax = fig.add_subplot()
+
+    ax.scatter(true_distances, measured_dstiances_ifft, color='red')
+    ax.scatter(true_distances, measured_distances_phase, color='green')
+    ax.scatter(true_distances, measured_distances_rssi, color='blue')
+
+    ax.plot(true_distances, true_distances, color='black', linestyle='--')
+    ax.set_xlabel('Real Distance [m]', fontsize=16)
+    ax.set_ylabel('Measured Distance [m]', fontsize=16)
+    ax.grid(True)
+    ax.set_title(f"Distance Measurements Comparison for {anchor_name}", fontsize=16)
+    ax.tick_params(axis='both', which='major', labelsize=16)
+    plt.subplots_adjust(left=0.1, right=0.95, top=0.95, bottom=0.1)
+
+    ax.set_ylim(0,30)
+    ax.set_xlim(0,15)
+
+    plt.savefig(f"dist_meas_comp_{anchor_name}{'_improved' if correction else ''}.png")
+
+    plt.show()
+
+    pass
+
+def create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchor, anchor_name="Anchor 1", correction=False):
+    true_distances=[]
+
+    ifft_lists= []
+    phase_lists = []
+    rssi_lists = []
+
+    for loc_res in loc_res_list:
+        td = euclidean_dist_2points((loc_res.x, loc_res.y), (anchor.x_cord, anchor.y_cord))
+        true_distances.append(td)
+
+        for anch in loc_res.meas_dict.keys():
+            if anch == anchor.name:
+                ifft_curr_list = []
+                phase_curr_list = []
+                rssi_curr_list = []
+                for meas in loc_res.meas_dict[anch]:
+                    ifft_curr_list.append(float(meas.ifft))
+                    phase_curr_list.append(float(meas.phase_slope))
+                    rssi_curr_list.append(float(meas.rssi_openspace))
+
+        ifft_lists.append(ifft_curr_list)
+        phase_lists.append(phase_curr_list)
+        rssi_lists.append(rssi_curr_list)
+
+    fig = plt.figure(figsize = (10,10))
+    ax = fig.add_subplot()
+
+    for id, td in enumerate(true_distances):
+        print(id)
+        td_supp = [td] * len(ifft_lists[id])
+
+        # print(len(td_supp))
+        # print(len(true_distances))
+        # print(len(ifft_lists[id]))
+        ax.scatter(td_supp, ifft_lists[id], color='red')
+        ax.scatter(td_supp, phase_lists[id], color='green')
+        ax.scatter(td_supp, rssi_lists[id], color='blue')
+
+    print("SCATTTERED")
+    ax.plot(true_distances, true_distances, color='black', linestyle='--')
+    ax.set_xlabel('Real Distance [m]', fontsize=16)
+    ax.set_ylabel('Measured Distance [m]', fontsize=16)
+    ax.grid(True)
+    ax.set_title(f"Distance Measurements Comparison for {anchor_name}", fontsize=16)
+    ax.tick_params(axis='both', which='major', labelsize=16)
+    plt.subplots_adjust(left=0.1, right=0.95, top=0.95, bottom=0.1)
+
+    ax.set_ylim(0, 30)
+    ax.set_xlim(0, 15)
+
+    plt.savefig(f"all_dist_meas_comp_{anchor_name}{'_improved' if correction else ''}.png")
+
+    plt.show()
+
+def get_distance_errors_clear(loc_res_list, anchor):
+    ifft_errors = []
+    phase_errors = []
+    rssi_errors = []
+
+    for loc_res in loc_res_list:
+        dist_to_point = euclidean_dist_2points((loc_res.x, loc_res.y), (anchor.x_cord, anchor.y_cord))
+
+        for anch in loc_res.meas_dict.keys():
+            if anch == anchor.name:
+                for meas in loc_res.meas_dict[anch]:
+                    ifft_errors.append(meas.ifft - dist_to_point)
+                    phase_errors.append(meas.phase_slope - dist_to_point)
+                    rssi_errors.append(meas.rssi_openspace - dist_to_point)
+
+    return {
+        'IFFT': ifft_errors,
+        'PHASE': phase_errors,
+        'RSSI': rssi_errors
+    }
+
+
+def create_cdf_all_errors(loc_res_list, loc_res_list_unbiased, anchor, anchor_name='Anchor 1'):
+
+    error_list = get_distance_errors_clear(loc_res_list, anchor)
+    error_list_bias = get_distance_errors_clear(loc_res_list_unbiased, anchor)
+
+    error_dict = {
+        'IFFT': error_list['IFFT'],
+        'PHASE': error_list['PHASE'],
+        'RSSI': error_list['RSSI'],
+        'IFFT - improved': error_list_bias['IFFT'],
+        'PHASE - improved': error_list_bias['PHASE'],
+        'RSSI - improved': error_list_bias['RSSI']
+    }
+    plt.figure(figsize=(10, 10))
+    colors = {
+        'IFFT': 'red',
+        'PHASE': 'green',
+        'RSSI': 'blue'
+    }
+
+    for alg, errors in error_dict.items():
+        sorted_data, cdf = compute_cdf(errors)
+        color = colors[alg.replace(' - improved', '')]
+        linestyle = '--' if ' - improved' in alg else '-'
+        plt.plot(sorted_data, cdf, linestyle=linestyle, color=color, linewidth=3, label=alg)
+
+    plt.xlabel('Distance measurement error [m]')
+    plt.xlim(-5,15)
+    plt.ylim(0,1)
+    plt.title(f"Distance measurements error for {anchor_name}", fontsize=16)
+    plt.grid(True)
+    plt.legend()
+
+    plt.savefig(f"all_errors_cdf_{anchor_name}.png")
+
+    plt.show()
+
+
+    pass
+
+
+
 def add_measurements_to_schema(ax, measured_points, real_points, color):
     for (mx, my), (rx, ry) in zip(measured_points, real_points):
         ax.scatter(mx, my, color=color, s=50)  # zielone punkty pomiarowe
@@ -1011,6 +1174,29 @@ def create_schema_with_results(loc_res_list, mult_type='avg', all_types=True,sav
         plt.savefig(file_name)
 
     plt.show()
+
+def create_single_schema_results(loc_res_list, type='IFFT',color="red", correction=False):
+    localized_points = []
+    real_points = []
+    for loc_res in loc_res_list:
+        rp = (loc_res.x, loc_res.y)
+        real_points.append(rp)
+
+        localized_points.append((loc_res.avg_mult[type].x, loc_res.avg_mult[type].y))
+
+    fig = plt.figure(figsize=(12, 12))
+
+    ax = fig.add_subplot()
+    make_default_schema(ax)
+    add_measurements_to_schema(ax, localized_points, real_points, color=color)
+    ax.set_title(type, fontsize=16)
+
+    file_name = f"{type}_loc{'_improved' if correction else ''}"
+    plt.savefig(file_name)
+
+    plt.show()
+
+    pass
 
 def calculate_distances_heatmap(localized_points, real_points):
     distances=[]
@@ -1587,21 +1773,39 @@ def create_rssi_free_space_loss_real(loc_res_list, anchor):
     plt.legend()
     plt.show()
 
+def load_aoa_errors(path):
+    df = pandas.read_excel(path)
+    data_list = df.iloc[:,0].tolist()
+    return data_list
 
 def compute_cdf(data):
     sorted_data = np.sort(data)
     cdf = np.arange(1, len(sorted_data)+1) / len(sorted_data)
     return sorted_data, cdf
 
-def create_cdf_loc_plot(error_dict):
+def create_cdf_loc_plot(error_dict, include_aoa=True, aoa_path='AoA_PDDA_100samples.xlsx'):
     plt.figure(figsize=(10, 10))
     #print(error_dict)
 
     colors = {
         'IFFT': 'red',
         'PHASE': 'green',
-        'RSSI': 'blue'
+        'RSSI': 'blue',
+        'AOA': 'purple'
     }
+
+    if include_aoa:
+        error_dict['IFFT'] = error_dict['IFFT - korekcja']
+        del(error_dict['IFFT - korekcja'])
+        error_dict['PHASE'] = error_dict['PHASE - korekcja']
+        del(error_dict['PHASE - korekcja'])
+        error_dict['RSSI'] = error_dict['RSSI - korekcja']
+        del(error_dict['RSSI - korekcja'])
+
+        #wczytanie aoa
+        error_dict['AOA'] = load_aoa_errors(aoa_path)
+
+
 
     for alg, errors in error_dict.items():
         sorted_data, cdf = compute_cdf(errors)
@@ -1610,14 +1814,16 @@ def create_cdf_loc_plot(error_dict):
 
         plt.plot(sorted_data, cdf, label=alg, linestyle=linestyle, color=color, linewidth=3)
 
-    plt.xlabel('Błąd lokalizacji [m]')
-    plt.xlim(0,13)
-    plt.ylabel(' Skumulowane Prawdopodobieństwo')
+    plt.xlabel('Localization Error [m]', fontsize=16)
+    plt.xlim(0,10)
+    plt.ylabel(' Cumulated Probability', fontsize=16)
     plt.ylim(0,1)
-    plt.title('Skumulowana funkcja rozkładu błędów lokalizacji')
+    plt.title('Localization Error Distribution', fontsize=16)
     plt.grid(True)
-    plt.legend()
+    plt.tick_params(axis='both', which='major', labelsize=16)
+    plt.legend(fontsize=16)
 
+    plt.savefig("loc_cdf.png")
 
     plt.show()
 
@@ -1694,12 +1900,25 @@ anchors = [Anchor(boards[2], 0, 0, 1.9), #FE
 if __name__ == '__main__':
     print("START")
 
-
+    create_default_schema()
     #analyze_all_files("wyniki_pomiarów", "reporting", multilateration_type="2D", clear_failed_meas=True, create_boxplots=False)
 
-    save_clear_meas_to_excel("wyniki_pomiarów//Y9//e3_9.txt", "wynik_e3_9.xlsx")
+    #save_clear_meas_to_excel("wyniki_pomiarów//Y9//e3_9.txt", "wynik_e3_9.xlsx")
 
     loc_res_list = load_loc_res_from_file("reporting/results.pkl") #lista obiektów klasy location_measurement_results
+    # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[0], anchor_name="Anchor 1", correction=False)
+    # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[1], anchor_name="Anchor 2", correction=False)
+    # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[2], anchor_name="Anchor 4", correction=False)
+    # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[3], anchor_name="Anchor 3", correction=False)
+
+
+    # create_scatter_plots_for_anchor_all_methods(loc_res_list, anchors[0], anchor_name="Anchor 1")
+    # create_scatter_plots_for_anchor_all_methods(loc_res_list, anchors[1], anchor_name="Anchor 2")
+    # create_scatter_plots_for_anchor_all_methods(loc_res_list, anchors[2], anchor_name="Anchor 4")
+    # create_scatter_plots_for_anchor_all_methods(loc_res_list, anchors[3], anchor_name="Anchor 3")
+
+
+    # create_single_schema_results(loc_res_list, type='PHASE', color='green')
     # print_loc_results(loc_res_list)
     #create_rssi_free_space_loss_real(loc_res_list, anchors[3])
 
@@ -1729,7 +1948,9 @@ if __name__ == '__main__':
 
 
     # for anchor in anchors:
-    #     # print(anchor.name)
+    #     print(anchor.name)
+
+
     #     # print(get_avg_error_distance_meas_per_anchor(loc_res_list, anchor, type='med'))
     #     # create_dist_error_histogram_for_anchor(loc_res_list, anchor, bins=30, type='avg', algorithm='IFFT', save_to_file=True)
     #     create_scatter_plots_for_anchor_minmax(loc_res_list, anchor=anchor, mult_type="avg", save_to_file=True,
@@ -1767,8 +1988,38 @@ if __name__ == '__main__':
     #a=
 
 
-    # analyze_all_files("wyniki_pomiarów", "testowe", multilateration_type='2D', clear_failed_meas=True, bias=bias_dict_reg)
+    #analyze_all_files("wyniki_pomiarów", "testowe", multilateration_type='2D', clear_failed_meas=True, bias=bias_dict_reg)
     loc_res_unbiased = load_loc_res_from_file("testowe/results.pkl")
+
+    error_dict_bias = get_locations_error(loc_res_unbiased, 'avg')
+    error_dict_med_bias = get_locations_error(loc_res_unbiased, 'med')
+
+    error_dict = get_locations_error(loc_res_list, 'avg')
+
+    error_dict['IFFT - korekcja'] = error_dict_bias['IFFT']
+    error_dict['PHASE - korekcja'] = error_dict_bias['PHASE']
+    error_dict['RSSI - korekcja'] = error_dict_bias['RSSI']
+    create_cdf_loc_plot(error_dict)
+
+
+
+
+
+    # create_cdf_all_errors(loc_res_list, loc_res_unbiased, anchors[0], anchor_name='Anchor 1')
+    # create_cdf_all_errors(loc_res_list, loc_res_unbiased, anchors[1], anchor_name='Anchor 2')
+    # create_cdf_all_errors(loc_res_list, loc_res_unbiased, anchors[2], anchor_name='Anchor 4')
+    # create_cdf_all_errors(loc_res_list, loc_res_unbiased, anchors[3], anchor_name='Anchor 3')
+
+    # create_scatter_plot_for_anchor_every_measurement(loc_res_unbiased, anchors[0], anchor_name="Anchor 1", correction=True)
+    # create_scatter_plot_for_anchor_every_measurement(loc_res_unbiased, anchors[1], anchor_name="Anchor 2", correction=True)
+    # create_scatter_plot_for_anchor_every_measurement(loc_res_unbiased, anchors[2], anchor_name="Anchor 4", correction=True)
+    # create_scatter_plot_for_anchor_every_measurement(loc_res_unbiased, anchors[3], anchor_name="Anchor 3", correction=True)
+
+    # create_scatter_plots_for_anchor_all_methods(loc_res_unbiased, anchors[0], anchor_name="Anchor 1", correction=True)
+    # create_scatter_plots_for_anchor_all_methods(loc_res_unbiased, anchors[1], anchor_name="Anchor 2", correction=True)
+    # create_scatter_plots_for_anchor_all_methods(loc_res_unbiased, anchors[2], anchor_name="Anchor 4", correction=True)
+    # create_scatter_plots_for_anchor_all_methods(loc_res_unbiased, anchors[3], anchor_name="Anchor 3", correction=True)
+    #create_single_schema_results(loc_res_unbiased, type='IFFT', color='red', correction=True)
     #print_loc_results(loc_res_unbiased)
 
     #create_boxplots_for_loc_res_list(loc_res_unbiased, anchors, True)
@@ -1859,14 +2110,14 @@ if __name__ == '__main__':
     #     #     create_loc_error_histogram(error_dict_med[alg], bins=30, mult_type='med', alg_type=alg,
     #     #                                report_dir=f'reporting//loc//{solver}')
     #
-    #     error_dict_bias = get_locations_error(loc_res_unbiased, 'avg')
-    #     error_dict_med_bias = get_locations_error(loc_res_unbiased, 'med')
-    #
-    #
-    #     error_dict['IFFT - korekcja'] = error_dict_bias['IFFT']
-    #     error_dict['PHASE - korekcja'] = error_dict_bias['PHASE']
-    #     error_dict['RSSI - korekcja'] = error_dict_bias['RSSI']
-    #     create_cdf_loc_plot(error_dict)
+        # error_dict_bias = get_locations_error(loc_res_unbiased, 'avg')
+        # error_dict_med_bias = get_locations_error(loc_res_unbiased, 'med')
+        #
+        #
+        # error_dict['IFFT - korekcja'] = error_dict_bias['IFFT']
+        # error_dict['PHASE - korekcja'] = error_dict_bias['PHASE']
+        # error_dict['RSSI - korekcja'] = error_dict_bias['RSSI']
+        # create_cdf_loc_plot(error_dict)
     #
     #     for alg in error_dict.keys():
     #         print(f"AVG {alg}")

@@ -628,10 +628,11 @@ def locate_point_trilateration(avg_meas, anchor_name_list, mult_type='2D',og_poi
     best, bestlabel = lp.add_target()
 
     for meas in avg_meas:
-        ifft.add_measure(meas.anchor, meas.ifft)
-        phase.add_measure(meas.anchor, meas.phase_slope)
-        rssi.add_measure(meas.anchor, meas.rssi_openspace)
-        best.add_measure(meas.anchor, meas.best)
+        if meas.anchor.split(":")[0] in anchor_name_list:
+            ifft.add_measure(meas.anchor, meas.ifft)
+            phase.add_measure(meas.anchor, meas.phase_slope)
+            rssi.add_measure(meas.anchor, meas.rssi_openspace)
+            best.add_measure(meas.anchor, meas.best)
 
     lp.solve()
 
@@ -648,13 +649,13 @@ def locate_point_trilateration(avg_meas, anchor_name_list, mult_type='2D',og_poi
                 'PHASE': phase_result,
                 'RSSI': rssi_result,
                 'BEST': best_result}
-    print(f"TRILATERATION {anchor_name_list} for ({og_point.x},{og_point.y})")
+    print(f"TRILATERATION {anchor_name_list} for ({og_point[0]},{og_point[1]})")
     print(f"IFFF loc: {ifft.loc}: diff:{res_dict['IFFT'].distance_from_point}")
     print(f"PHASE loc: {phase.loc}: diff:{res_dict['PHASE'].distance_from_point}")
     print(f"RSSI loc: {rssi.loc}: diff:{res_dict['IFFT'].distance_from_point}")
     print(f"BEST loc: {best.loc}: diff:{res_dict['BEST'].distance_from_point}")
 
-    return res_dict()
+    return res_dict
 
 def get_average_measurement_per_anchor_from_batch(sorted_meas, data_batch):
     avg_meas = []
@@ -2053,14 +2054,31 @@ if __name__ == '__main__':
     #analyze_all_files("wyniki_pomiarów", "reporting", multilateration_type='2D', clear_failed_meas=True)
     print("NEW TYPE ANALYZING")
     #analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b20.pkl", data_batch=20)
-    loc_res_ist_b20 = load_loc_res_from_file("test_tril/lrl_b20.pkl")
 
-    mul1= loc_res_ist_b20[20].avg_mult['IFFT']
-    print(f'IFFT: ({mul1.x},{mul1.y}): {mul1.distance_from_point}')
-
+    # loc_res_ist_b20 = load_loc_res_from_file("test_tril/lrl_b20.pkl")
+    #
+    # mul1= loc_res_ist_b20[20].avg_mult['IFFT']
+    # print(f'IFFT: ({mul1.x},{mul1.y}): {mul1.distance_from_point}')
+    #
     loc_res_list = load_loc_res_from_file("reporting/results.pkl") #lista obiektów klasy location_measurement_results
-    mul2= loc_res_list[20].avg_mult['IFFT']
-    print(f'IFFT: ({mul2.x},{mul2.y}): {mul2.distance_from_point}')
+    # mul2= loc_res_list[20].avg_mult['IFFT']
+    # print(f'IFFT: ({mul2.x},{mul2.y}): {mul2.distance_from_point}')
+    print("TRILATERACJA")
+    analyze_all_files_improved("wyniki_pomiarów", "test_tril", 'trilat_full.pkl', trilaterations=True)
+    loc_res_list_trilateration = load_loc_res_from_file("test_tril/trilat_full.pkl")
+    print(loc_res_list_trilateration[0].avg_trilat)
+
+
+
+
+
+
+
+
+
+
+
+
     # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[0], anchor_name="Anchor 1", correction=False)
     # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[1], anchor_name="Anchor 2", correction=False)
     # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[2], anchor_name="Anchor 4", correction=False)

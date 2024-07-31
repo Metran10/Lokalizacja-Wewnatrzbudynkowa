@@ -1,6 +1,7 @@
 import math
 import os
 import pickle
+import random
 import re
 import csv
 import numpy as np
@@ -10,6 +11,7 @@ import scipy as sc
 import localization as lx
 import pandas as pd
 import matplotlib.pyplot as plt
+from conda_libmamba_solver import solver
 from matplotlib.gridspec import GridSpec
 from scipy.optimize import least_squares
 import statistics
@@ -520,6 +522,12 @@ def analyze_all_files(base_dir, report_dir, multilateration_type='2D', clear_fai
                 avg_mult_res = locate_point(avg_meas, multilateration_type, (x,y,1.6), solver=solver)
                 # print("MEDIAN")
                 # print_avg_measurements(med_meas)
+                # if x == 1 and y ==0:
+                #     print(avg_meas)
+                #     for me in avg_meas:
+                #         print(f'({x}, {y}) AVG: {me.anchor}: {me.ifft}')
+
+
                 med_mult_res = locate_point(med_meas, multilateration_type, (x,y,1.6), solver=solver)
 
                 location_results.append(location_measurements_results(
@@ -529,12 +537,154 @@ def analyze_all_files(base_dir, report_dir, multilateration_type='2D', clear_fai
                     avg_meas=avg_meas,
                     med_meas=med_meas,
                     avg_mult=avg_mult_res,
-                    med_mult=med_mult_res
+                    med_mult=med_mult_res,
+                    avg_trilat=None
                 ))
 
     #do pliku json
     #dict_list = [loc_res.to_dict() for loc_res in location_results]
     save_loc_res_to_file(f"{report_dir}//results.pkl", location_results)
+
+
+def analyze_all_files_improved(base_dir, report_dir, file_name, mult_type='2D', clear_failed_meas=True, bias=None, trilaterations=False, data_batch=None):
+    location_results = []
+
+    trilateration_combinations = [
+        'FE_E4_FC', 'FE_FC_F7', 'FE_E4_F7', 'F7_FC_E4'
+    ]
+
+    for root, dirs, files in os.walk(base_dir):
+        for file in files:
+            if file.endswith(".txt"):
+                file_path = os.path.join(root, file)
+                x, y = extract_location_cord_from_file(file)
+                ml = read_measurements(file_path)
+                if clear_failed_meas:
+                    ml = clear_failed_measurements(ml)
+                sorted_meas = sort_measurements_for_anchor(ml)
+                if bias is not None:
+                    sorted_meas = sub_bias(sorted_meas, bias)
+
+                if data_batch is not None:
+                    #wybranie x danych, albo maks dostepne jesli nie  ma x pomiarow
+                    avg_meas = get_average_measurement_per_anchor_from_batch(sorted_meas, data_batch)
+                    med_meas = get_median_measurement_per_anchor_from_batch(sorted_meas, data_batch)
+                else:
+                    avg_meas = get_average_measurement_per_anchor(sorted_meas)
+                    med_meas = get_median_measurement_per_anchor(sorted_meas)
+
+                if trilaterations:
+                    avg_trilat_res = {}
+
+                    for comb in trilateration_combinations:
+                        comb_res = locate_point_trilateration(avg_meas, comb, '2D', (x,y,1.6), solver='LSE')
+
+                        avg_trilat_res[comb] = comb_res
+
+                    location_results.append(location_measurements_results(
+                        x=x,
+                        y=y,
+                        meas_dict=sorted_meas,
+                        avg_meas=avg_meas,
+                        med_meas=med_meas,
+                        avg_mult=None,
+                        med_mult=None,
+                        avg_trilat=avg_trilat_res
+                    ))
+                else:
+                    print(avg_meas)
+                    for me in avg_meas:
+                        print(f'({x}, {y}) AVG: {me.anchor}: {me.ifft}')
+
+                    avg_mult_res = locate_point(avg_meas, mult_type, (x, y, 1.6), solver='LSE')
+                    #avg_mult_res = locate_point(avg_meas, mult_type, (x,y,1.6), solver=solver)
+                    med_mult_res = locate_point(med_meas, mult_type, (x,y,1.6), solver='LSE')
+
+                    location_results.append(location_measurements_results(
+                        x=x,
+                        y=y,
+                        meas_dict=sorted_meas,
+                        avg_meas=avg_meas,
+                        med_meas=med_meas,
+                        avg_mult=avg_mult_res,
+                        med_mult=med_mult_res,
+                        avg_trilat=None
+                    ))
+    save_loc_res_to_file(f"{report_dir}//{file_name}", location_results)
+
+
+def locate_point_trilateration(avg_meas, anchor_name_list, mult_type='2D',og_point=None, solver='LSE'):
+    lp = lx.Project(mode=mult_type, solver=solver)
+
+    anchor_name_list = anchor_name_list.split('_')
+    for anchor in anchors:
+        if anchor.name.split(':')[0] in anchor_name_list:
+            lp.add_anchor(anchor.name, (anchor.x_cord, anchor.y_cord, anchor.z_cord))
+
+
+    ifft, ifftlabel = lp.add_target()
+    phase, phaselabel = lp.add_target()
+    rssi, rssilabel = lp.add_target()
+    best, bestlabel = lp.add_target()
+
+    for meas in avg_meas:
+        ifft.add_measure(meas.anchor, meas.ifft)
+        phase.add_measure(meas.anchor, meas.phase_slope)
+        rssi.add_measure(meas.anchor, meas.rssi_openspace)
+        best.add_measure(meas.anchor, meas.best)
+
+    lp.solve()
+
+    ifft_result = mult_result('IFFT', ifft.loc.x, ifft.loc.y, 1.9,
+                              euclidean_dist_2points((ifft.loc.x, ifft.loc.y), (og_point[0], og_point[1]), False))
+    phase_result = mult_result('PHASE', phase.loc.x, phase.loc.y, 1.9,
+                              euclidean_dist_2points((phase.loc.x, phase.loc.y), (og_point[0], og_point[1]), False))
+    rssi_result = mult_result('IFFT', rssi.loc.x, rssi.loc.y, 1.9,
+                              euclidean_dist_2points((rssi.loc.x, rssi.loc.y), (og_point[0], og_point[1]), False))
+    best_result = mult_result('IFFT', best.loc.x, best.loc.y, 1.9,
+                              euclidean_dist_2points((best.loc.x, best.loc.y), (og_point[0], og_point[1]), False))
+
+    res_dict = {'IFFT': ifft_result,
+                'PHASE': phase_result,
+                'RSSI': rssi_result,
+                'BEST': best_result}
+    print(f"TRILATERATION {anchor_name_list} for ({og_point.x},{og_point.y})")
+    print(f"IFFF loc: {ifft.loc}: diff:{res_dict['IFFT'].distance_from_point}")
+    print(f"PHASE loc: {phase.loc}: diff:{res_dict['PHASE'].distance_from_point}")
+    print(f"RSSI loc: {rssi.loc}: diff:{res_dict['IFFT'].distance_from_point}")
+    print(f"BEST loc: {best.loc}: diff:{res_dict['BEST'].distance_from_point}")
+
+    return res_dict()
+
+def get_average_measurement_per_anchor_from_batch(sorted_meas, data_batch):
+    avg_meas = []
+
+    for anchor in sorted_meas.keys():
+        #wybranie x danych z listy, jesli nie ma to cała
+        meas_sample = data_batch
+        if meas_sample > len(sorted_meas[anchor]):
+            meas_sample = len(sorted_meas[anchor])
+        sorted_meas[anchor] = random.sample(sorted_meas[anchor], meas_sample)
+
+        meas = get_average_distances(sorted_meas[anchor])
+        avg_meas.append(meas)
+
+    return avg_meas
+
+def get_median_measurement_per_anchor_from_batch(sorted_meas, data_batch):
+    med_meas = []
+
+    for anchor in sorted_meas.keys():
+        #wybranie x danych z listy
+        meas_sample = data_batch
+        if meas_sample > len(sorted_meas[anchor]):
+            meas_sample = len(sorted_meas[anchor])
+        sorted_meas[anchor] = random.sample(sorted_meas[anchor], meas_sample)
+
+        meas = get_med_measurement(sorted_meas[anchor])
+        med_meas.append(meas)
+
+    return med_meas
 
 
 def sub_bias(sorted_meas, bias):
@@ -1900,12 +2050,17 @@ anchors = [Anchor(boards[2], 0, 0, 1.9), #FE
 if __name__ == '__main__':
     print("START")
 
-    create_default_schema()
-    #analyze_all_files("wyniki_pomiarów", "reporting", multilateration_type="2D", clear_failed_meas=True, create_boxplots=False)
+    #analyze_all_files("wyniki_pomiarów", "reporting", multilateration_type='2D', clear_failed_meas=True)
+    print("NEW TYPE ANALYZING")
+    #analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b20.pkl", data_batch=20)
+    loc_res_ist_b20 = load_loc_res_from_file("test_tril/lrl_b20.pkl")
 
-    #save_clear_meas_to_excel("wyniki_pomiarów//Y9//e3_9.txt", "wynik_e3_9.xlsx")
+    mul1= loc_res_ist_b20[20].avg_mult['IFFT']
+    print(f'IFFT: ({mul1.x},{mul1.y}): {mul1.distance_from_point}')
 
     loc_res_list = load_loc_res_from_file("reporting/results.pkl") #lista obiektów klasy location_measurement_results
+    mul2= loc_res_list[20].avg_mult['IFFT']
+    print(f'IFFT: ({mul2.x},{mul2.y}): {mul2.distance_from_point}')
     # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[0], anchor_name="Anchor 1", correction=False)
     # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[1], anchor_name="Anchor 2", correction=False)
     # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[2], anchor_name="Anchor 4", correction=False)

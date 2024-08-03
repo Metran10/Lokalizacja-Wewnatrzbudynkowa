@@ -2038,7 +2038,76 @@ def save_clear_meas_to_excel(meas_file_name, output_file_name):
             df = pd.DataFrame(dict_list)
             df.to_excel(writer, sheet_name=sheet_name, index=False)
 
+def get_trilateration_errors(loc_res_list):
+    error_dict = {'FE_E4_FC': {'IFFT': [], 'PHASE': [], 'RSSI': []},
+                  'FE_FC_F7': {'IFFT': [], 'PHASE': [], 'RSSI': []},
+                  'FE_E4_F7': {'IFFT': [], 'PHASE': [], 'RSSI': []},
+                  'F7_FC_E4': {'IFFT': [], 'PHASE': [], 'RSSI': []}}
 
+    for loc_res in loc_res_list:
+        error_dict['FE_E4_FC']['IFFT'].append(loc_res.avg_trilat['FE_E4_FC']['IFFT'].distance_from_point)
+        error_dict['FE_E4_FC']['PHASE'].append(loc_res.avg_trilat['FE_E4_FC']['PHASE'].distance_from_point)
+        error_dict['FE_E4_FC']['RSSI'].append(loc_res.avg_trilat['FE_E4_FC']['RSSI'].distance_from_point)
+
+        error_dict['FE_FC_F7']['IFFT'].append(loc_res.avg_trilat['FE_FC_F7']['IFFT'].distance_from_point)
+        error_dict['FE_FC_F7']['PHASE'].append(loc_res.avg_trilat['FE_FC_F7']['PHASE'].distance_from_point)
+        error_dict['FE_FC_F7']['RSSI'].append(loc_res.avg_trilat['FE_FC_F7']['RSSI'].distance_from_point)
+
+        error_dict['FE_E4_F7']['IFFT'].append(loc_res.avg_trilat['FE_E4_F7']['IFFT'].distance_from_point)
+        error_dict['FE_E4_F7']['PHASE'].append(loc_res.avg_trilat['FE_E4_F7']['PHASE'].distance_from_point)
+        error_dict['FE_E4_F7']['RSSI'].append(loc_res.avg_trilat['FE_E4_F7']['RSSI'].distance_from_point)
+
+        error_dict['F7_FC_E4']['IFFT'].append(loc_res.avg_trilat['F7_FC_E4']['IFFT'].distance_from_point)
+        error_dict['F7_FC_E4']['PHASE'].append(loc_res.avg_trilat['F7_FC_E4']['PHASE'].distance_from_point)
+        error_dict['F7_FC_E4']['RSSI'].append(loc_res.avg_trilat['F7_FC_E4']['RSSI'].distance_from_point)
+
+    return error_dict
+
+def create_loc_error_trilateration_comparision(error_dict, error_dict_unbiased, bins=20, alg_type='IFFT'):
+    for anchors_comb in error_dict.keys():
+        fig, axes = plt.subplots(nrows=2, ncols=1, figsize=(10,10))
+
+        error_list = error_dict[anchors_comb][alg_type]
+        error_list_unbiased = error_dict_unbiased[anchors_comb][alg_type]
+
+        min_error = min(min(error_list), min(error_list_unbiased))
+        max_error = max(max(error_list), max(error_list_unbiased))
+        print(min_error)
+        print(max_error)
+        #common_bins = np.linspace(min_error, max_error, bins)
+
+        counts, bins, patches = axes[0].hist(error_list, bins=bins, color='skyblue', edgecolor='black')
+        quantiles = np.percentile(error_list, [25, 50, 75, 90, 95])
+        quantiles_labels = ['25%', '50%', '75%', '90%', '95%']
+
+        for quantile, label in zip(quantiles, quantiles_labels):
+            axes[0].axvline(quantile, color='black', linestyle='dashed', linewidth=2)
+            axes[0].text(quantile, max(counts) * 0.9, f'{label}\n{quantile:.2f}', color='black', ha='right', va='center')
+
+        axes[0].set_title(f'HIST {alg_type} czyste {anchors_comb}')
+        axes[0].set_xlabel('Błąd [m]')
+        axes[0].set_ylabel('Wystapienia')
+        axes[0].grid(axis='y', alpha=0.75)
+        print(f'Sredni blad przed korekta {np.mean(error_list)} dla {anchors_comb}')
+
+        #po korekcie
+        counts_bias, bins_bias, patches_bias = axes[1].hist(error_list_unbiased, bins=bins, color='skyblue',
+                                                            edgecolor='black')
+        quantiles_bias = np.percentile(error_list_unbiased, [25, 50, 75, 90, 95])
+        quantiles_labels_bias = ['25%', '50%', '75%', '90%', '95%']
+
+        for quantile, label in zip(quantiles_bias, quantiles_labels_bias):
+            axes[1].axvline(quantile, color='black', linestyle='dashed', linewidth=2)
+            axes[1].text(quantile, max(counts_bias) * 0.9, f'{label}\n{quantile:.2f}', color='black', ha='right',
+                         va='center')
+
+        axes[1].set_title(f'HIST {alg_type} po korekcie {anchors_comb}')
+        axes[1].set_xlabel("Błąd [m]")
+        axes[1].set_ylabel("Wystąpienia")
+        axes[1].grid(axis='y', alpha=0.75)
+        print(f'Sredni blad po korekcie {np.mean(error_list_unbiased)} dla {anchors_comb}')
+
+        plt.show()
     pass
 
 
@@ -2064,13 +2133,28 @@ if __name__ == '__main__':
     # mul2= loc_res_list[20].avg_mult['IFFT']
     # print(f'IFFT: ({mul2.x},{mul2.y}): {mul2.distance_from_point}')
     print("TRILATERACJA")
-    analyze_all_files_improved("wyniki_pomiarów", "test_tril", 'trilat_full.pkl', trilaterations=True)
+    #analyze_all_files_improved("wyniki_pomiarów", "test_tril", 'trilat_full.pkl', trilaterations=True)
     loc_res_list_trilateration = load_loc_res_from_file("test_tril/trilat_full.pkl")
-    print(loc_res_list_trilateration[0].avg_trilat)
+    #get_trilateration_errors(loc_res_list_trilateration)
 
+    bias_dict_reg = {'FE': {'IFFT': 0.97, 'PHASE': 6.50, 'RSSI': 6.45, 'BEST': 0.97},
+                     'E4': {'IFFT': 1.12, 'PHASE': 3.07, 'RSSI': 1.92, 'BEST': 1.12},
+                     'F7': {'IFFT': 0.09, 'PHASE': 2.11, 'RSSI': -1.11, 'BEST': 0.09},
+                     'FC': {'IFFT': 1.44, 'PHASE': 4.16, 'RSSI': -0.29, 'BEST': 1.44}}
+    # a =1.35
+    bias_dict_reg_med = {
+        'FE': {'IFFT': 0.81, 'PHASE': 6.53, 'RSSI': 1.07, 'BEST': 0.81},
+        'E4': {'IFFT': 1.07, 'PHASE': 3.00, 'RSSI': 1.97, 'BEST': 1.07},
+        'F7': {'IFFT': 0.15, 'PHASE': 2.10, 'RSSI': -0.46, 'BEST': 0.15},
+        'FC': {'IFFT': 1.48, 'PHASE': 4.20, 'RSSI': -0.82, 'BEST': 1.48}
+    }
 
+    #analyze_all_files_improved("wyniki_pomiarów", "test_tril", "trilat_full_unbiased.pkl", bias=bias_dict_reg, trilaterations=True)
+    loc_res_list_trilateration_unbiased = load_loc_res_from_file("test_tril/trilat_full_unbiased.pkl")
+    error_dict = get_trilateration_errors(loc_res_list_trilateration)
+    error_dict_unbiased = get_trilateration_errors(loc_res_list_trilateration_unbiased)
 
-
+    create_loc_error_trilateration_comparision(error_dict, error_dict_unbiased, 30, 'RSSI')
 
 
 
@@ -2147,17 +2231,17 @@ if __name__ == '__main__':
     # #         if avg.anchor.split(":")[0] == "FE":
     # #             print(f'AVG: {avg}')
     #
-    bias_dict_reg = {'FE': {'IFFT': 0.97, 'PHASE': 6.50, 'RSSI': 6.45, 'BEST': 0.97},
-                     'E4': {'IFFT': 1.12, 'PHASE': 3.07, 'RSSI': 1.92, 'BEST': 1.12},
-                     'F7': {'IFFT': 0.09, 'PHASE': 2.11, 'RSSI': -1.11, 'BEST': 0.09},
-                     'FC': {'IFFT': 1.44, 'PHASE': 4.16, 'RSSI': -0.29, 'BEST': 1.44}}
-    #a =1.35
-    bias_dict_reg_med = {
-        'FE': {'IFFT': 0.81, 'PHASE': 6.53, 'RSSI': 1.07, 'BEST': 0.81},
-        'E4': {'IFFT': 1.07, 'PHASE': 3.00, 'RSSI': 1.97, 'BEST': 1.07},
-        'F7': {'IFFT': 0.15, 'PHASE': 2.10, 'RSSI': -0.46, 'BEST': 0.15},
-        'FC': {'IFFT': 1.48, 'PHASE': 4.20, 'RSSI': -0.82, 'BEST': 1.48}
-    }
+    # bias_dict_reg = {'FE': {'IFFT': 0.97, 'PHASE': 6.50, 'RSSI': 6.45, 'BEST': 0.97},
+    #                  'E4': {'IFFT': 1.12, 'PHASE': 3.07, 'RSSI': 1.92, 'BEST': 1.12},
+    #                  'F7': {'IFFT': 0.09, 'PHASE': 2.11, 'RSSI': -1.11, 'BEST': 0.09},
+    #                  'FC': {'IFFT': 1.44, 'PHASE': 4.16, 'RSSI': -0.29, 'BEST': 1.44}}
+    # #a =1.35
+    # bias_dict_reg_med = {
+    #     'FE': {'IFFT': 0.81, 'PHASE': 6.53, 'RSSI': 1.07, 'BEST': 0.81},
+    #     'E4': {'IFFT': 1.07, 'PHASE': 3.00, 'RSSI': 1.97, 'BEST': 1.07},
+    #     'F7': {'IFFT': 0.15, 'PHASE': 2.10, 'RSSI': -0.46, 'BEST': 0.15},
+    #     'FC': {'IFFT': 1.48, 'PHASE': 4.20, 'RSSI': -0.82, 'BEST': 1.48}
+    # }
     #a=
 
 

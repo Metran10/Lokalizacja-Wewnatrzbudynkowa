@@ -40,7 +40,7 @@ class Anchor:
 
 class location_measurements_results:
 
-    def __init__(self, x, y, meas_dict, avg_meas, med_meas, avg_mult, med_mult, avg_trilat):
+    def __init__(self, x, y, meas_dict, avg_meas, med_meas, avg_mult, med_mult, avg_trilat, closest_trilat):
         self.x = x
         self.y = y
         self.meas_dict = meas_dict #wszystkie pomiary danego punktu w slowniku z zazwami kotwic jako kluczami
@@ -49,6 +49,7 @@ class location_measurements_results:
         self.avg_mult = avg_mult #słownik obiektów klasy mult_result na podstawie srednich wartosci z nazwami algorytmów estymacji jako kluczami
         self.med_mult = med_mult #^to samo tylko na podstawie mediany
         self.avg_trilat = avg_trilat #słownik słowników 'avg_mult' z kombinacjami nazw kotwic jako kluczami
+        self.closest_trilat = closest_trilat #klucz do slownika avg_trilat z kombinacją najbliższych kotwic
         pass
 
     def __str__(self):

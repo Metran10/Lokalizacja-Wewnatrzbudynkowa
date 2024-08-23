@@ -21,6 +21,7 @@ from schema import make_default_schema, create_default_schema
 from scipy.stats import linregress
 from matplotlib.colors import LinearSegmentedColormap
 from scipy.optimize import curve_fit
+from matplotlib.ticker import MultipleLocator
 
 boards = [
     "FC:90:0F:C9:6E:24",
@@ -562,6 +563,8 @@ def analyze_all_files_improved(base_dir, report_dir, file_name, mult_type='2D', 
                 if clear_failed_meas:
                     ml = clear_failed_measurements(ml)
                 sorted_meas = sort_measurements_for_anchor(ml)
+                avg_distances = get_avg_distances_to_anchors(sorted_meas)
+                
                 if bias is not None:
                     sorted_meas = sub_bias(sorted_meas, bias)
 
@@ -576,6 +579,9 @@ def analyze_all_files_improved(base_dir, report_dir, file_name, mult_type='2D', 
                 if trilaterations:
                     avg_trilat_res = {}
 
+                    #znalezienie kombinacji najblizszych
+                    closest_trilat = find_closest_anchors(x, y, trilateration_combinations, anchors, avg_distances)
+
                     for comb in trilateration_combinations:
                         comb_res = locate_point_trilateration(avg_meas, comb, '2D', (x,y,1.6), solver='LSE')
 
@@ -589,7 +595,8 @@ def analyze_all_files_improved(base_dir, report_dir, file_name, mult_type='2D', 
                         med_meas=med_meas,
                         avg_mult=None,
                         med_mult=None,
-                        avg_trilat=avg_trilat_res
+                        avg_trilat=avg_trilat_res,
+                        closest_trilat= closest_trilat
                     ))
                 else:
                     print(avg_meas)
@@ -608,10 +615,67 @@ def analyze_all_files_improved(base_dir, report_dir, file_name, mult_type='2D', 
                         med_meas=med_meas,
                         avg_mult=avg_mult_res,
                         med_mult=med_mult_res,
-                        avg_trilat=None
+                        avg_trilat=None,
+                        closest_trilat=None
                     ))
     save_loc_res_to_file(f"{report_dir}//{file_name}", location_results)
 
+def get_avg_distances_to_anchors(meas_dict):
+    avg_distances = {}
+    for anch in meas_dict.keys():
+        ifft_distances = []
+        phase_distances = []
+        rssi_distances = []
+
+        for meas in meas_dict[anch]:
+            ifft_distances.append(meas.ifft)
+            phase_distances.append(meas.phase_slope)
+            rssi_distances.append(meas.rssi_openspace)
+
+        avg_distances[anch.split(':')[0]] = {'IFFT': np.mean(ifft_distances), 'PHASE': np.mean(phase_distances), 'RSSI': np.mean(rssi_distances)}
+    return avg_distances
+    
+
+def find_closest_anchors(x, y, trilat_comb, anchors_list, avg_distances):
+    distances_to_anchor = []
+    closest_anchors = []
+    max_dist = 0
+    final_comb = None
+
+    if x == 9 and y ==5:
+        print("DEBUG")
+
+    for anchor in anchors_list:
+        anch_name = anchor.name.split(':')[0]
+        dist = np.mean([avg_distances[anch_name]['IFFT'], avg_distances[anch_name]['PHASE'], avg_distances[anch_name]['RSSI']])
+        #dist = euclidean_dist_2points((x,y), (anchor.x_cord, anchor.y_cord))
+        distances_to_anchor.append(dist)
+        if dist > max_dist:
+            max_dist = dist
+
+    deleted_one = False
+    for id, dist in enumerate(distances_to_anchor):
+        if dist == max_dist and not deleted_one:
+            deleted_one = True
+        else:
+            close_anch_name = anchors_list[id].name.split(':')[0]
+            closest_anchors.append(close_anch_name)
+
+        # if dist != max_dist and not deleted_one:
+        #     close_anch_name = anchors_list[id].name.split(':')[0]
+        #     closest_anchors.append(close_anch_name)
+        # else:
+        #     deleted_one = True
+
+    for trilat in trilat_comb:
+        counter = 0
+        for anch in closest_anchors:
+            if anch in trilat:
+                counter += 1
+        if counter == 3:
+            final_comb = trilat
+
+    return final_comb
 
 def locate_point_trilateration(avg_meas, anchor_name_list, mult_type='2D',og_point=None, solver='LSE'):
     lp = lx.Project(mode=mult_type, solver=solver)
@@ -1221,29 +1285,30 @@ def create_cdf_all_errors(loc_res_list, loc_res_list_unbiased, anchor, anchor_na
 
     error_dict = {
         'IFFT': error_list['IFFT'],
-        'PHASE': error_list['PHASE'],
+        'Phase Slope': error_list['PHASE'],
         'RSSI': error_list['RSSI'],
-        'IFFT - improved': error_list_bias['IFFT'],
-        'PHASE - improved': error_list_bias['PHASE'],
-        'RSSI - improved': error_list_bias['RSSI']
+        'IFFT - after bias correction': error_list_bias['IFFT'],
+        'Phase Slope - after bias correction': error_list_bias['PHASE'],
+        'RSSI - after bias correction': error_list_bias['RSSI']
     }
     plt.figure(figsize=(10, 10))
     colors = {
         'IFFT': 'red',
-        'PHASE': 'green',
+        'Phase Slope': 'green',
         'RSSI': 'blue'
     }
 
     for alg, errors in error_dict.items():
         sorted_data, cdf = compute_cdf(errors)
-        color = colors[alg.replace(' - improved', '')]
-        linestyle = '--' if ' - improved' in alg else '-'
+        color = colors[alg.replace(' - after bias correction', '')]
+        linestyle = '--' if ' - after bias correction' in alg else '-'
         plt.plot(sorted_data, cdf, linestyle=linestyle, color=color, linewidth=3, label=alg)
 
-    plt.xlabel('Distance measurement error [m]')
+    plt.xlabel('Distance measurement error [m]', fontsize=16)
     plt.xlim(-5,15)
     plt.ylim(0,1)
     plt.title(f"Distance measurements error for {anchor_name}", fontsize=16)
+    plt.tick_params(axis='both', which='major', labelsize=16)
     plt.grid(True)
     plt.legend()
 
@@ -1624,10 +1689,7 @@ def create_loc_error_hist_comparision(error_list, error_list_bias, bins=20, alg_
     axes[0].set_ylabel("Wystąpienia")
     axes[0].grid(axis='y', alpha=0.75)
 
-    if alg_type == 'PHASE':
-        print("PRE")
-        print(quantiles)
-        print(len(error_list))
+
     #po korekcie
     counts_bias, bins_bias, patches_bias = axes[1].hist(error_list_bias, bins=common_bins, color='skyblue', edgecolor='black')
 
@@ -1647,15 +1709,9 @@ def create_loc_error_hist_comparision(error_list, error_list_bias, bins=20, alg_
     axes[1].set_ylabel("Wystąpienia")
     axes[1].grid(axis='y', alpha=0.75)
 
-    if alg_type == 'PHASE':
-        print("POST")
-        print(quantiles_bias)
-        print(len(error_list_bias))
-        print(error_list_bias)
-
-    # max_bin=max(max(bins), max(bins_bias))
-    # axes[0].set_xlim([0, 20])
-    # axes[1].set_xlim([-5, 20])
+    print(alg_type)
+    print(f'Czysta: {np.mean(error_list)}')
+    print(f'Korekta: {np.mean(error_list_bias)}')
 
     if save_to_file:
         file_name = f".//{report_dir}//" + f"error_hist_{mult_type}_{alg_type}_comparision.png"
@@ -1940,7 +1996,7 @@ def create_cdf_loc_plot(error_dict, include_aoa=True, aoa_path='AoA_PDDA_100samp
 
     colors = {
         'IFFT': 'red',
-        'PHASE': 'green',
+        'Phase Slope': 'green',
         'RSSI': 'blue',
         'AOA': 'purple'
     }
@@ -1948,8 +2004,9 @@ def create_cdf_loc_plot(error_dict, include_aoa=True, aoa_path='AoA_PDDA_100samp
     if include_aoa:
         error_dict['IFFT'] = error_dict['IFFT - korekcja']
         del(error_dict['IFFT - korekcja'])
-        error_dict['PHASE'] = error_dict['PHASE - korekcja']
+        error_dict['Phase Slope'] = error_dict['PHASE - korekcja']
         del(error_dict['PHASE - korekcja'])
+        del(error_dict['PHASE'])
         error_dict['RSSI'] = error_dict['RSSI - korekcja']
         del(error_dict['RSSI - korekcja'])
 
@@ -1970,7 +2027,17 @@ def create_cdf_loc_plot(error_dict, include_aoa=True, aoa_path='AoA_PDDA_100samp
     plt.ylabel(' Cumulated Probability', fontsize=16)
     plt.ylim(0,1)
     plt.title('Localization Error Distribution', fontsize=16)
-    plt.grid(True)
+    plt.grid(True, which='both', axis='both')
+
+    plt.gca().xaxis.set_major_locator(MultipleLocator(2))
+    plt.gca().xaxis.set_minor_locator(MultipleLocator(1))
+
+    plt.gca().yaxis.set_major_locator(MultipleLocator(0.2))
+    plt.gca().yaxis.set_minor_locator(MultipleLocator(0.1))
+
+
+
+
     plt.tick_params(axis='both', which='major', labelsize=16)
     plt.legend(fontsize=16)
 
@@ -2063,6 +2130,18 @@ def get_trilateration_errors(loc_res_list):
 
     return error_dict
 
+def get_closest_trilateration_errors(loc_res_list):
+    error_dict = {'IFFT': [], 'PHASE': [], 'RSSI':[]}
+
+    for loc_res in loc_res_list:
+        mult_res = loc_res.avg_trilat[loc_res.closest_trilat]
+        error_dict['IFFT'].append(mult_res['IFFT'].distance_from_point)
+        error_dict['PHASE'].append(mult_res['PHASE'].distance_from_point)
+        error_dict['RSSI'].append(mult_res['RSSI'].distance_from_point)
+
+    return error_dict
+
+
 def create_loc_error_trilateration_comparision(error_dict, error_dict_unbiased, bins=20, alg_type='IFFT'):
     for anchors_comb in error_dict.keys():
         fig, axes = plt.subplots(nrows=2, ncols=1, figsize=(10,10))
@@ -2134,7 +2213,7 @@ if __name__ == '__main__':
     # print(f'IFFT: ({mul2.x},{mul2.y}): {mul2.distance_from_point}')
     print("TRILATERACJA")
     #analyze_all_files_improved("wyniki_pomiarów", "test_tril", 'trilat_full.pkl', trilaterations=True)
-    loc_res_list_trilateration = load_loc_res_from_file("test_tril/trilat_full.pkl")
+    #loc_res_list_trilateration = load_loc_res_from_file("test_tril/trilat_full.pkl")
     #get_trilateration_errors(loc_res_list_trilateration)
 
     bias_dict_reg = {'FE': {'IFFT': 0.97, 'PHASE': 6.50, 'RSSI': 6.45, 'BEST': 0.97},
@@ -2150,43 +2229,143 @@ if __name__ == '__main__':
     }
 
     #analyze_all_files_improved("wyniki_pomiarów", "test_tril", "trilat_full_unbiased.pkl", bias=bias_dict_reg, trilaterations=True)
-    loc_res_list_trilateration_unbiased = load_loc_res_from_file("test_tril/trilat_full_unbiased.pkl")
-    error_dict = get_trilateration_errors(loc_res_list_trilateration)
-    error_dict_unbiased = get_trilateration_errors(loc_res_list_trilateration_unbiased)
-
-    create_loc_error_trilateration_comparision(error_dict, error_dict_unbiased, 30, 'RSSI')
-
-
+    # loc_res_list_trilateration_unbiased = load_loc_res_from_file("test_tril/trilat_full_unbiased.pkl")
+    # error_dict = get_trilateration_errors(loc_res_list_trilateration)
+    # error_dict_unbiased = get_trilateration_errors(loc_res_list_trilateration_unbiased)
+    #
+    # create_loc_error_trilateration_comparision(error_dict, error_dict_unbiased, 30, 'RSSI')
 
 
+    #Data batche
+    #b10
+    # print("B10")
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b10.pkl", data_batch=10)
+    # loc_res_list_b10 = load_loc_res_from_file("test_tril/lrl_b10.pkl")
+    #
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b10_unbiased.pkl", data_batch=10,
+    #                            bias=bias_dict_reg)
+    # loc_res_list_b10_unbiased = load_loc_res_from_file("test_tril/lrl_b10_unbiased.pkl")
+    #
+    # error_dict_b10 = get_locations_error(loc_res_list_b10, 'avg')
+    # error_dict_b10_bias = get_locations_error(loc_res_list_b10_unbiased, 'avg')
+    #
+    # create_loc_error_hist_comparision(error_dict_b10['IFFT'], error_dict_b10_bias['IFFT'], bins=30, mult_type='avg',
+    #                                   alg_type='IFFT', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b10['PHASE'], error_dict_b10_bias['PHASE'], bins=30, mult_type='avg',
+    #                                   alg_type='PHASE', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b10['RSSI'], error_dict_b10_bias['RSSI'], bins=30, mult_type='avg',
+    #                                   alg_type='RSSI', isBias=True)
 
+    #b20
+    # print("B20")
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b20.pkl", data_batch=20)
+    # loc_res_list_b20 = load_loc_res_from_file("test_tril/lrl_b20.pkl")
+    #
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b20_unbiased.pkl", data_batch=20, bias=bias_dict_reg)
+    # loc_res_list_b20_unbiased = load_loc_res_from_file("test_tril/lrl_b20_unbiased.pkl")
+    #
+    # error_dict_b20 = get_locations_error(loc_res_list_b20, 'avg')
+    # error_dict_b20_bias = get_locations_error(loc_res_list_b20_unbiased, 'avg')
+    #
+    # create_loc_error_hist_comparision(error_dict_b20['IFFT'], error_dict_b20_bias['IFFT'], bins=30, mult_type='avg', alg_type='IFFT',isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b20['PHASE'], error_dict_b20_bias['PHASE'], bins=30, mult_type='avg',
+    #                                   alg_type='PHASE', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b20['RSSI'], error_dict_b20_bias['RSSI'], bins=30, mult_type='avg',
+    #                                   alg_type='RSSI', isBias=True)
+    #B40
+    # print("B40")
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b40.pkl", data_batch=40)
+    # loc_res_list_b40 = load_loc_res_from_file("test_tril/lrl_b40.pkl")
+    #
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b40_unbiased.pkl", data_batch=40,
+    #                            bias=bias_dict_reg)
+    # loc_res_list_b40_unbiased = load_loc_res_from_file("test_tril/lrl_b40_unbiased.pkl")
+    #
+    # error_dict_b40 = get_locations_error(loc_res_list_b40, 'avg')
+    # error_dict_b40_bias = get_locations_error(loc_res_list_b40_unbiased, 'avg')
+    #
+    # create_loc_error_hist_comparision(error_dict_b40['IFFT'], error_dict_b40_bias['IFFT'], bins=30, mult_type='avg',
+    #                                   alg_type='IFFT', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b40['PHASE'], error_dict_b40_bias['PHASE'], bins=30, mult_type='avg',
+    #                                   alg_type='PHASE', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b40['RSSI'], error_dict_b40_bias['RSSI'], bins=30, mult_type='avg',
+    #                                   alg_type='RSSI', isBias=True)
+    # #B60
+    # print("B60")
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b60.pkl", data_batch=60)
+    # loc_res_list_b60 = load_loc_res_from_file("test_tril/lrl_b60.pkl")
+    #
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b60_unbiased.pkl", data_batch=60,
+    #                            bias=bias_dict_reg)
+    # loc_res_list_b60_unbiased = load_loc_res_from_file("test_tril/lrl_b60_unbiased.pkl")
+    #
+    # error_dict_b60 = get_locations_error(loc_res_list_b60, 'avg')
+    # error_dict_b60_bias = get_locations_error(loc_res_list_b60_unbiased, 'avg')
+    #
+    # create_loc_error_hist_comparision(error_dict_b60['IFFT'], error_dict_b60_bias['IFFT'], bins=30, mult_type='avg',
+    #                                   alg_type='IFFT', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b60['PHASE'], error_dict_b60_bias['PHASE'], bins=30, mult_type='avg',
+    #                                   alg_type='PHASE', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b60['RSSI'], error_dict_b60_bias['RSSI'], bins=30, mult_type='avg',
+    #                                   alg_type='RSSI', isBias=True)
 
+    # # B80
+    # print("B80")
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b80.pkl", data_batch=80)
+    # loc_res_list_b80 = load_loc_res_from_file("test_tril/lrl_b80.pkl")
+    #
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b80_unbiased.pkl", data_batch=80,
+    #                            bias=bias_dict_reg)
+    # loc_res_list_b80_unbiased = load_loc_res_from_file("test_tril/lrl_b80_unbiased.pkl")
+    #
+    # error_dict_b80 = get_locations_error(loc_res_list_b80, 'avg')
+    # error_dict_b80_bias = get_locations_error(loc_res_list_b80_unbiased, 'avg')
+    #
+    # create_loc_error_hist_comparision(error_dict_b80['IFFT'], error_dict_b80_bias['IFFT'], bins=30, mult_type='avg',
+    #                                   alg_type='IFFT', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b80['PHASE'], error_dict_b80_bias['PHASE'], bins=30, mult_type='avg',
+    #                                   alg_type='PHASE', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b80['RSSI'], error_dict_b80_bias['RSSI'], bins=30, mult_type='avg',
+    #                                   alg_type='RSSI', isBias=True)
 
+    # B100
+    # print("B100")
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b100.pkl", data_batch=100)
+    # loc_res_list_b100 = load_loc_res_from_file("test_tril/lrl_b100.pkl")
+    #
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_b100_unbiased.pkl", data_batch=100,
+    #                            bias=bias_dict_reg)
+    # loc_res_list_b100_unbiased = load_loc_res_from_file("test_tril/lrl_b100_unbiased.pkl")
+    #
+    # error_dict_b100 = get_locations_error(loc_res_list_b100, 'avg')
+    # error_dict_b100_bias = get_locations_error(loc_res_list_b100_unbiased, 'avg')
+    #
+    # create_loc_error_hist_comparision(error_dict_b100['IFFT'], error_dict_b100_bias['IFFT'], bins=30, mult_type='avg',
+    #                                   alg_type='IFFT', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b100['PHASE'], error_dict_b100_bias['PHASE'], bins=30, mult_type='avg',
+    #                                   alg_type='PHASE', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_b100['RSSI'], error_dict_b100_bias['RSSI'], bins=30, mult_type='avg',
+    #                                   alg_type='RSSI', isBias=True)
 
-    # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[0], anchor_name="Anchor 1", correction=False)
-    # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[1], anchor_name="Anchor 2", correction=False)
-    # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[2], anchor_name="Anchor 4", correction=False)
-    # create_scatter_plot_for_anchor_every_measurement(loc_res_list, anchors[3], anchor_name="Anchor 3", correction=False)
-
-
-    # create_scatter_plots_for_anchor_all_methods(loc_res_list, anchors[0], anchor_name="Anchor 1")
-    # create_scatter_plots_for_anchor_all_methods(loc_res_list, anchors[1], anchor_name="Anchor 2")
-    # create_scatter_plots_for_anchor_all_methods(loc_res_list, anchors[2], anchor_name="Anchor 4")
-    # create_scatter_plots_for_anchor_all_methods(loc_res_list, anchors[3], anchor_name="Anchor 3")
-
-
-    # create_single_schema_results(loc_res_list, type='PHASE', color='green')
-    # print_loc_results(loc_res_list)
-    #create_rssi_free_space_loss_real(loc_res_list, anchors[3])
-
-    # for loc_res in loc_res_list:
-    #     print(f'({loc_res.x}, {loc_res.y})')
-    #     for anchor in loc_res.meas_dict.keys():
-    #         print(f'({anchor}): {len(loc_res.meas_dict[anchor])}')
-
-
-
-
+    #closest trilat
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_trilat_b100.pkl", trilaterations=True, data_batch=100)
+    # loc_res_list_trilat_b100 = load_loc_res_from_file("test_tril/lrl_trilat_b100.pkl")
+    #
+    # analyze_all_files_improved("wyniki_pomiarów", "test_tril", "lrl_trilat_b100_bias.pkl", trilaterations=True,
+    #                             data_batch=100, bias=bias_dict_reg)
+    # loc_res_list_trilat_b100_unbiased = load_loc_res_from_file("test_tril/lrl_trilat_b100_bias.pkl")
+    #
+    # error_dict_trilat = get_closest_trilateration_errors(loc_res_list_trilat_b100)
+    # error_dict_trilat_bias = get_closest_trilateration_errors(loc_res_list_trilat_b100_unbiased)
+    #
+    # create_loc_error_hist_comparision(error_dict_trilat['IFFT'], error_dict_trilat_bias['IFFT'], bins=30, mult_type='avg',
+    #                                   alg_type='IFFT', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_trilat['PHASE'], error_dict_trilat_bias['PHASE'], bins=30,
+    #                                   mult_type='avg',
+    #                                   alg_type='PHASE', isBias=True)
+    # create_loc_error_hist_comparision(error_dict_trilat['RSSI'], error_dict_trilat_bias['RSSI'], bins=30,
+    #                                   mult_type='avg',
+    #                                   alg_type='RSSI', isBias=True)
 
 
 
@@ -2256,7 +2435,7 @@ if __name__ == '__main__':
     error_dict['IFFT - korekcja'] = error_dict_bias['IFFT']
     error_dict['PHASE - korekcja'] = error_dict_bias['PHASE']
     error_dict['RSSI - korekcja'] = error_dict_bias['RSSI']
-    create_cdf_loc_plot(error_dict)
+    create_cdf_loc_plot(error_dict) #fig 6
 
 
 
@@ -2265,7 +2444,7 @@ if __name__ == '__main__':
     # create_cdf_all_errors(loc_res_list, loc_res_unbiased, anchors[0], anchor_name='Anchor 1')
     # create_cdf_all_errors(loc_res_list, loc_res_unbiased, anchors[1], anchor_name='Anchor 2')
     # create_cdf_all_errors(loc_res_list, loc_res_unbiased, anchors[2], anchor_name='Anchor 4')
-    # create_cdf_all_errors(loc_res_list, loc_res_unbiased, anchors[3], anchor_name='Anchor 3')
+    #create_cdf_all_errors(loc_res_list, loc_res_unbiased, anchors[3], anchor_name='Anchor 3')
 
     # create_scatter_plot_for_anchor_every_measurement(loc_res_unbiased, anchors[0], anchor_name="Anchor 1", correction=True)
     # create_scatter_plot_for_anchor_every_measurement(loc_res_unbiased, anchors[1], anchor_name="Anchor 2", correction=True)

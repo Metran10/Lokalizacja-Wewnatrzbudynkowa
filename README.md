@@ -1,0 +1,1 @@
+Supporting code base for Master-Thesis "Indoor Localization using Bluetooth Low Energy and Phase Shift Measurements" (pol. "Lokalizacja Wewnątrzbudynkowa z wykorzystaniem pomiarów przesunięcia fazowego sygnału radiowego") in Wrocław University of Science and Technology
